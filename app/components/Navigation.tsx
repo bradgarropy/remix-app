@@ -5,7 +5,6 @@ import type {RootLoaderData} from "~/root"
 
 const Navigation: FC = () => {
     const {user} = useLoaderData<RootLoaderData>()
-    console.log(user)
 
     return (
         <nav className="flex gap-4 font-bold">
