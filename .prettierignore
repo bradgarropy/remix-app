@@ -10,6 +10,9 @@
 /api
 /app/styles/tailwind.css
 
+# database
+/prisma/dev.db
+
 # test
 /coverage
 

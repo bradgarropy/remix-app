@@ -1,4 +1,6 @@
-import type {LinksFunction, MetaFunction} from "@remix-run/node"
+import type {User} from "@prisma/client"
+import type {LinksFunction, LoaderFunction, MetaFunction} from "@remix-run/node"
+import {json} from "@remix-run/node"
 import {
     Links,
     LiveReload,
@@ -8,9 +10,10 @@ import {
     ScrollRestoration,
 } from "@remix-run/react"
 
-import Footer from "~/components/Footer/Footer"
-import Header from "~/components/Header/Header"
+import Footer from "~/components/Footer"
+import Header from "~/components/Header"
 import tailwindStyles from "~/styles/tailwind.css"
+import {getUser} from "~/utils/auth.server"
 
 const meta: MetaFunction = () => ({
     charset: "utf-8",
@@ -27,6 +30,20 @@ const links: LinksFunction = () => {
     ]
 
     return links
+}
+
+type RootLoaderData = {
+    user?: User
+}
+
+const loader: LoaderFunction = async ({request}) => {
+    const user = await getUser(request)
+
+    const data: RootLoaderData = {
+        user,
+    }
+
+    return json<RootLoaderData>(data)
 }
 
 const App = () => {
@@ -57,4 +74,5 @@ const App = () => {
 }
 
 export default App
-export {links, meta}
+export {links, loader, meta}
+export type {RootLoaderData}
