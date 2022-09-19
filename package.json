@@ -1,7 +1,7 @@
 {
-    "name": "remix-starter",
-    "version": "1.2.0",
-    "description": "💿 remix starter",
+    "name": "remix-app",
+    "version": "0.0.1",
+    "description": "💿 remix app",
     "keywords": [
         "typescript",
         "react",
@@ -13,9 +13,9 @@
         "remix-stack",
         "tailwind"
     ],
-    "homepage": "https://github.com/bradgarropy/remix-starter",
+    "homepage": "https://github.com/bradgarropy/remix-app",
     "bugs": {
-        "url": "https://github.com/bradgarropy/remix-starter/issues"
+        "url": "https://github.com/bradgarropy/remix-app/issues"
     },
     "license": "MIT",
     "author": {
@@ -25,7 +25,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/bradgarropy/remix-starter"
+        "url": "https://github.com/bradgarropy/remix-app"
     },
     "scripts": {
         "start": "run-p --print-label start:*",
