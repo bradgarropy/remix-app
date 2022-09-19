@@ -3,7 +3,7 @@ import {redirect} from "@remix-run/node"
 import {compare, hash} from "bcryptjs"
 
 import {db} from "~/utils/db.server"
-import {deleteSession, getSession} from "~/utils/session.server"
+import {deleteSession, getUserIdFromSession} from "~/utils/session.server"
 
 type Credentials = {
     email: string
@@ -44,8 +44,7 @@ const logout = (request: Request) => {
 }
 
 const getUser = async (request: Request): Promise<User | null> => {
-    const session = await getSession(request)
-    const userId = session.get("userId")
+    const userId = await getUserIdFromSession(request)
 
     if (!userId) {
         return null
@@ -56,13 +55,13 @@ const getUser = async (request: Request): Promise<User | null> => {
 }
 
 const requireUser = async (request: Request) => {
-    const user = await getUser(request)
+    const userId = await getUserIdFromSession(request)
 
-    if (!user) {
+    if (!userId) {
         throw redirect("/login")
     }
 
-    return user
+    return userId
 }
 
 export {getUser, login, logout, requireUser, signup}

@@ -1,3 +1,4 @@
+import type {User} from "@prisma/client"
 import {redirect} from "@remix-run/node"
 
 import {sessionStorage} from "~/utils/sessionStorage.server"
@@ -9,7 +10,7 @@ const getSession = (request: Request) => {
     return session
 }
 
-const createSession = async (userId: string) => {
+const createSession = async (userId: User["id"]) => {
     const session = await sessionStorage.getSession()
     session.set("userId", userId)
     const cookie = await sessionStorage.commitSession(session)
@@ -32,4 +33,10 @@ const deleteSession = async (request: Request) => {
     })
 }
 
-export {createSession, deleteSession, getSession}
+const getUserIdFromSession = async (request: Request): Promise<number> => {
+    const session = await getSession(request)
+    const userId: number = session.get("userId")
+    return userId
+}
+
+export {createSession, deleteSession, getSession, getUserIdFromSession}
