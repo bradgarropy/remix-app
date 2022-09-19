@@ -8,9 +8,20 @@ datasource db {
 }
 
 model User {
-    id        String   @id @default(uuid())
+    id        Int      @id @default(autoincrement())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     email     String   @unique
     password  String
+    todos     Todo[]
+}
+
+model Todo {
+    id         Int      @id @default(autoincrement())
+    userId     Int
+    user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+    content    String
+    isComplete Boolean  @default(false)
 }
