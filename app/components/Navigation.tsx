@@ -12,8 +12,8 @@ const Navigation: FC = () => {
                 Home
             </NavLink>
 
-            <NavLink to="/dashboard" prefetch="intent">
-                Dashboard
+            <NavLink to="/todos" prefetch="intent">
+                Todos
             </NavLink>
 
             {user ? (
