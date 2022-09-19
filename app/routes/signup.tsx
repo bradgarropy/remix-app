@@ -13,7 +13,7 @@ import {createSession} from "~/utils/session.server"
 
 const meta: MetaFunction = () => {
     const meta: HtmlMetaDescriptor = {
-        title: "💿 remix starter | about",
+        title: "💿 remix app | about",
     }
 
     return meta
