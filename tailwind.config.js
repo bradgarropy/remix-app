@@ -10,11 +10,15 @@ const config = {
                     blue: "#3defe9",
                 },
             },
-            textDecorationThickness: {
-                3: "3px",
+            gridTemplateColumns: {
+                "todos": "auto 1fr auto",
+                "new-todo": "1fr auto",
             },
             gridTemplateRows: {
                 layout: "auto 1fr auto",
+            },
+            textDecorationThickness: {
+                3: "3px",
             },
             textUnderlineOffset: {
                 6: "6px",

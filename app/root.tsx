@@ -2,12 +2,15 @@ import type {User} from "@prisma/client"
 import type {LinksFunction, LoaderFunction, MetaFunction} from "@remix-run/node"
 import {json} from "@remix-run/node"
 import {
+    Form,
     Links,
     LiveReload,
     Meta,
+    NavLink,
     Outlet,
     Scripts,
     ScrollRestoration,
+    useLoaderData,
 } from "@remix-run/react"
 
 import Footer from "~/components/Footer"
@@ -47,6 +50,8 @@ const loader: LoaderFunction = async ({request}) => {
 }
 
 const App = () => {
+    const {user} = useLoaderData<RootLoaderData>()
+
     return (
         <html lang="en">
             <head>

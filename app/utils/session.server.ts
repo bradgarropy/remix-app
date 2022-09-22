@@ -15,7 +15,7 @@ const createSession = async (userId: User["id"]) => {
     session.set("userId", userId)
     const cookie = await sessionStorage.commitSession(session)
 
-    return redirect("/", {
+    return redirect("/todos", {
         headers: {
             "Set-Cookie": cookie,
         },

@@ -8,20 +8,18 @@ const Navigation: FC = () => {
 
     return (
         <nav className="flex gap-4 font-bold">
-            <NavLink to="/" end prefetch="intent">
-                Home
-            </NavLink>
-
-            <NavLink to="/todos" prefetch="intent">
-                Todos
-            </NavLink>
-
             {user ? (
-                <Form action="/logout" method="post">
-                    <button type="submit" className="button">
-                        Logout
-                    </button>
-                </Form>
+                <>
+                    <NavLink to="/todos" prefetch="intent">
+                        Todos
+                    </NavLink>
+
+                    <Form action="/logout" method="post">
+                        <button type="submit" className="button">
+                            Logout
+                        </button>
+                    </Form>
+                </>
             ) : (
                 <>
                     <NavLink to="/signup" prefetch="intent">

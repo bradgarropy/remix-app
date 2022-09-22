@@ -1,11 +1,22 @@
+import {NavLink, useLoaderData} from "@remix-run/react"
 import type {FC} from "react"
 
 import Navigation from "~/components/Navigation"
+import type {RootLoaderData} from "~/root"
 
 const Header: FC = () => {
+    const {user} = useLoaderData<RootLoaderData>()
+
     return (
         <header className="flex justify-between items-center px-8 py-12">
-            <h1 className="text-3xl font-bold">Remix App</h1>
+            <div className="flex items-baseline gap-4">
+                <NavLink to="/" prefetch="intent">
+                    <h1 className="text-3xl font-bold">💿 Remix App</h1>
+                </NavLink>
+
+                {user ? <span>{user.email}</span> : null}
+            </div>
+
             <Navigation />
         </header>
     )

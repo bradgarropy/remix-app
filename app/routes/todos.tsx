@@ -7,6 +7,7 @@ import type {
 import {json} from "@remix-run/node"
 import {Form, useLoaderData, useSubmit} from "@remix-run/react"
 import type {ChangeEventHandler} from "react"
+import {Fragment} from "react"
 
 import {requireUser} from "~/utils/auth.server"
 import {createTodo, deleteTodo, getTodos, updateTodo} from "~/utils/todo.server"
@@ -70,48 +71,81 @@ const TodosRoute = () => {
 
     return (
         <>
-            <Form method="post" className="mb-12">
-                <div className="grid">
-                    <label htmlFor="content">Todo</label>
+            <Form method="post" className="max-w-2xl m-auto mb-12">
+                <div className="grid grid-cols-new-todo">
+                    <label htmlFor="content" className="hidden">
+                        Todo
+                    </label>
 
                     <input
                         type="text"
                         name="content"
                         id="content"
-                        className="text-black"
+                        placeholder="new todo"
+                        className="text-white border-b-4 border-b-remix-blue bg-neutral-900 p-6 text-lg  focus:outline-remix-blue rounded-tl-md"
                     />
-                </div>
 
-                <button type="submit" name="action" value="create">
-                    Create
-                </button>
+                    <button
+                        type="submit"
+                        name="action"
+                        value="create"
+                        className="px-8 py-6 bg-remix-blue text-remix-black font-bold uppercase text-xl w-full rounded-tr-md"
+                    >
+                        Create
+                    </button>
+                </div>
             </Form>
 
-            {todos.map(todo => {
-                return (
-                    <div key={todo.id} className="grid grid-flow-col mb-4">
-                        <Form method="post" onChange={handleChange}>
-                            <input type="hidden" name="action" value="update" />
-                            <input type="hidden" name="id" value={todo.id} />
+            <div className="grid grid-cols-todos gap-4 max-w-2xl m-auto items-center">
+                {todos.map(todo => {
+                    return (
+                        <Fragment key={todo.id}>
+                            <Form method="post" onChange={handleChange}>
+                                <input
+                                    type="hidden"
+                                    name="action"
+                                    value="update"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value={todo.id}
+                                />
 
-                            <input
-                                type="checkbox"
-                                name="isComplete"
-                                id="isComplete"
-                                defaultChecked={todo.isComplete}
-                            />
-                        </Form>
+                                <input
+                                    type="checkbox"
+                                    name="isComplete"
+                                    id="isComplete"
+                                    defaultChecked={todo.isComplete}
+                                    className="w-6 h-6 cursor-pointer accent-remix-blue"
+                                />
+                            </Form>
 
-                        <p>{todo.content}</p>
+                            <p>{todo.content}</p>
 
-                        <Form method="post">
-                            <input type="hidden" name="action" value="delete" />
-                            <input type="hidden" name="id" value={todo.id} />
-                            <button type="submit">Delete</button>
-                        </Form>
-                    </div>
-                )
-            })}
+                            <Form method="post">
+                                <input
+                                    type="hidden"
+                                    name="action"
+                                    value="delete"
+                                />
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value={todo.id}
+                                />
+
+                                <button
+                                    type="submit"
+                                    className="border-4 rounded-md px-2 py-1 border-remix-blue"
+                                >
+                                    Delete
+                                </button>
+                            </Form>
+                        </Fragment>
+                    )
+                })}
+            </div>
         </>
     )
 }
