@@ -24,7 +24,7 @@ const loader: LoaderFunction = async ({request}) => {
     const userId = await requireUser(request)
 
     const todos = await getTodos(userId)
-    return json<LoaderData>({todos})
+    return json({todos})
 }
 
 const action: ActionFunction = async ({request}) => {
