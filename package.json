@@ -1,6 +1,6 @@
 {
     "name": "remix-app",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "💿 remix app",
     "keywords": [
         "typescript",
@@ -67,6 +67,7 @@
         "@remix-run/eslint-config": "^1.7.0",
         "@remix-run/serve": "^1.7.0",
         "@testing-library/react": "^13.3.0",
+        "@types/bcryptjs": "^2.4.2",
         "@types/react": "^18.0.15",
         "@types/react-dom": "^18.0.6",
         "@vitejs/plugin-react": "^2.0.1",

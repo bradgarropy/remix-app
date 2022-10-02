@@ -33,7 +33,7 @@ const links: LinksFunction = () => {
 }
 
 type RootLoaderData = {
-    user?: User
+    user: User | null
 }
 
 const loader: LoaderFunction = async ({request}) => {
@@ -43,7 +43,7 @@ const loader: LoaderFunction = async ({request}) => {
         user,
     }
 
-    return json<RootLoaderData>(data)
+    return json(data)
 }
 
 const App = () => {
