@@ -1,7 +1,8 @@
 import type {
     ActionFunction,
     HtmlMetaDescriptor,
-    MetaFunction,
+    V2_MetaDescriptor,
+    V2_MetaFunction,
 } from "@remix-run/node"
 import {json} from "@remix-run/node"
 import {Form, useActionData} from "@remix-run/react"
@@ -11,12 +12,12 @@ import {signup} from "~/utils/auth.server"
 import {db} from "~/utils/db.server"
 import {createSession} from "~/utils/session.server"
 
-const meta: MetaFunction = () => {
-    const meta: HtmlMetaDescriptor = {
-        title: "💿 remix app | about",
-    }
-
-    return meta
+const meta: V2_MetaFunction = () => {
+    return [
+        {
+            title: "💿 remix app | about",
+        },
+    ]
 }
 
 const action: ActionFunction = async ({request}) => {

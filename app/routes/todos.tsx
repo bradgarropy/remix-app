@@ -2,7 +2,7 @@ import type {Todo} from "@prisma/client"
 import type {
     ActionFunction,
     LoaderFunction,
-    MetaFunction,
+    V2_MetaFunction,
 } from "@remix-run/node"
 import {json} from "@remix-run/node"
 import {Form, useLoaderData, useSubmit} from "@remix-run/react"
@@ -12,9 +12,13 @@ import {Fragment} from "react"
 import {requireUser} from "~/utils/auth.server"
 import {createTodo, deleteTodo, getTodos, updateTodo} from "~/utils/todo.server"
 
-const meta: MetaFunction = () => ({
-    title: "💿 remix app | todos",
-})
+const meta: V2_MetaFunction = () => {
+    return [
+        {
+            title: "💿 remix app | todos",
+        },
+    ]
+}
 
 type LoaderData = {
     todos: Todo[]

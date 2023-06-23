@@ -1,5 +1,9 @@
 import type {User} from "@prisma/client"
-import type {LinksFunction, LoaderFunction, MetaFunction} from "@remix-run/node"
+import type {
+    LinksFunction,
+    LoaderFunction,
+    V2_MetaFunction,
+} from "@remix-run/node"
 import {json} from "@remix-run/node"
 import {
     Links,
@@ -15,11 +19,13 @@ import Header from "~/components/Header"
 import tailwindStyles from "~/styles/tailwind.css"
 import {getUser} from "~/utils/auth.server"
 
-const meta: MetaFunction = () => ({
-    charset: "utf-8",
-    title: "💿 remix app",
-    viewport: "width=device-width,initial-scale=1",
-})
+const meta: V2_MetaFunction = () => {
+    return [
+        {charset: "utf-8"},
+        {title: "💿 remix app"},
+        {viewport: "width=device-width,initial-scale=1"},
+    ]
+}
 
 const links: LinksFunction = () => {
     const links = [
