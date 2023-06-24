@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://bradgarropy-s-workspace-8eg8mm.us-east-1.xata.sh/db/todos",
+  "codegen": {
+    "output": "app/xata.ts"
+  }
+}

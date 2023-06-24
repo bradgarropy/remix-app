@@ -1,8 +1,7 @@
-import type {User} from "@prisma/client"
 import {redirect} from "@remix-run/node"
 import {compare, hash} from "bcryptjs"
+import {getXataClient} from "~/xata"
 
-import {db} from "~/utils/db.server"
 import {deleteSession, getUserIdFromSession} from "~/utils/session.server"
 
 type Credentials = {
@@ -10,21 +9,24 @@ type Credentials = {
     password: string
 }
 
-const signup = async (credentials: Credentials): Promise<User> => {
+const signup = async (credentials: Credentials) => {
     const hashedPassword = await hash(credentials.password, 10)
 
-    const user = await db.user.create({
-        data: {
-            email: credentials.email,
-            password: hashedPassword,
-        },
+    const xata = getXataClient()
+    const user = await xata.db.users.create({
+        email: credentials.email,
+        password: hashedPassword,
     })
 
     return user
 }
 
-const login = async (credentials: Credentials): Promise<User | null> => {
-    const user = await db.user.findUnique({where: {email: credentials.email}})
+const login = async (credentials: Credentials) => {
+    const xata = getXataClient()
+
+    const user = await xata.db.users
+        .filter({email: credentials.email})
+        .getFirst()
 
     if (!user) {
         return null
@@ -43,14 +45,15 @@ const logout = (request: Request) => {
     return deleteSession(request)
 }
 
-const getUser = async (request: Request): Promise<User | null> => {
+const getUser = async (request: Request) => {
     const userId = await getUserIdFromSession(request)
 
     if (!userId) {
         return null
     }
 
-    const user = await db.user.findUnique({where: {id: userId}})
+    const xata = getXataClient()
+    const user = await xata.db.users.filter({id: userId}).getFirst()
     return user
 }
 

@@ -2,10 +2,10 @@ import {NavLink, useLoaderData} from "@remix-run/react"
 import type {FC} from "react"
 
 import Navigation from "~/components/Navigation"
-import type {RootLoaderData} from "~/root"
+import {loader} from "~/root"
 
 const Header: FC = () => {
-    const {user} = useLoaderData<RootLoaderData>()
+    const {user} = useLoaderData<typeof loader>()
 
     return (
         <header className="flex justify-between items-center px-8 py-12">

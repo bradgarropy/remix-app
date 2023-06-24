@@ -1,9 +1,4 @@
-import type {Todo} from "@prisma/client"
-import type {
-    ActionFunction,
-    LoaderFunction,
-    V2_MetaFunction,
-} from "@remix-run/node"
+import type {ActionFunction, LoaderArgs, V2_MetaFunction} from "@remix-run/node"
 import {json} from "@remix-run/node"
 import {Form, useLoaderData, useSubmit} from "@remix-run/react"
 import type {ChangeEventHandler} from "react"
@@ -12,7 +7,7 @@ import {Fragment} from "react"
 import {requireUser} from "~/utils/auth.server"
 import {createTodo, deleteTodo, getTodos, updateTodo} from "~/utils/todo.server"
 
-const meta: V2_MetaFunction = () => {
+export const meta: V2_MetaFunction = () => {
     return [
         {
             title: "💿 remix app | todos",
@@ -20,18 +15,14 @@ const meta: V2_MetaFunction = () => {
     ]
 }
 
-type LoaderData = {
-    todos: Todo[]
-}
-
-const loader: LoaderFunction = async ({request}) => {
+export const loader = async ({request}: LoaderArgs) => {
     const userId = await requireUser(request)
 
     const todos = await getTodos(userId)
     return json({todos})
 }
 
-const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({request}) => {
     const userId = await requireUser(request)
 
     const form = await request.formData()
@@ -46,7 +37,7 @@ const action: ActionFunction = async ({request}) => {
         }
 
         case "update": {
-            const id = Number(form.get("id"))
+            const id = form.get("id") as string
             const isComplete = !!form.get("isComplete")
             const todo = await updateTodo(id, {isComplete})
 
@@ -54,7 +45,7 @@ const action: ActionFunction = async ({request}) => {
         }
 
         case "delete": {
-            const id = Number(form.get("id"))
+            const id = form.get("id") as string
             const todo = await deleteTodo(id)
 
             return json(todo)
@@ -66,7 +57,7 @@ const action: ActionFunction = async ({request}) => {
 }
 
 const TodosRoute = () => {
-    const {todos} = useLoaderData<LoaderData>()
+    const {todos} = useLoaderData<typeof loader>()
     const submit = useSubmit()
 
     const handleChange: ChangeEventHandler<HTMLFormElement> = event => {
@@ -155,4 +146,3 @@ const TodosRoute = () => {
 }
 
 export default TodosRoute
-export {action, loader, meta}

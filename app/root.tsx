@@ -1,9 +1,4 @@
-import type {User} from "@prisma/client"
-import type {
-    LinksFunction,
-    LoaderFunction,
-    V2_MetaFunction,
-} from "@remix-run/node"
+import type {LinksFunction, LoaderArgs, V2_MetaFunction} from "@remix-run/node"
 import {json} from "@remix-run/node"
 import {
     Links,
@@ -19,7 +14,7 @@ import Header from "~/components/Header"
 import tailwindStyles from "~/styles/tailwind.css"
 import {getUser} from "~/utils/auth.server"
 
-const meta: V2_MetaFunction = () => {
+export const meta: V2_MetaFunction = () => {
     return [
         {charset: "utf-8"},
         {title: "💿 remix app"},
@@ -27,7 +22,7 @@ const meta: V2_MetaFunction = () => {
     ]
 }
 
-const links: LinksFunction = () => {
+export const links: LinksFunction = () => {
     const links = [
         {
             rel: "stylesheet",
@@ -38,18 +33,9 @@ const links: LinksFunction = () => {
     return links
 }
 
-type RootLoaderData = {
-    user: User | null
-}
-
-const loader: LoaderFunction = async ({request}) => {
+export const loader = async ({request}: LoaderArgs) => {
     const user = await getUser(request)
-
-    const data: RootLoaderData = {
-        user,
-    }
-
-    return json(data)
+    return json({user})
 }
 
 const App = () => {
@@ -80,5 +66,3 @@ const App = () => {
 }
 
 export default App
-export {links, loader, meta}
-export type {RootLoaderData}

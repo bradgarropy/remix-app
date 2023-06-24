@@ -1,8 +1,4 @@
-import type {
-    ActionFunction,
-    V2_HtmlMetaDescriptor,
-    V2_MetaFunction,
-} from "@remix-run/node"
+import type {ActionFunction, V2_MetaFunction} from "@remix-run/node"
 import {json} from "@remix-run/node"
 import {Form, useActionData} from "@remix-run/react"
 import type {FC} from "react"
@@ -10,11 +6,11 @@ import type {FC} from "react"
 import {login} from "~/utils/auth.server"
 import {createSession} from "~/utils/session.server"
 
-const meta: V2_MetaFunction = () => {
+export const meta: V2_MetaFunction = () => {
     return []
 }
 
-const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({request}) => {
     const form = await request.formData()
 
     const email = form.get("email") as string
@@ -69,4 +65,3 @@ const LoginRoute: FC = () => {
 }
 
 export default LoginRoute
-export {action, meta}

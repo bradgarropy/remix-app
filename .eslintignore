@@ -11,7 +11,7 @@
 /app/styles/tailwind.css
 
 # database
-/prisma/dev.db
+/app/xata.ts
 
 # test
 /coverage

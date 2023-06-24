@@ -1,10 +1,9 @@
 import {Form, NavLink, useLoaderData} from "@remix-run/react"
 import type {FC} from "react"
-
-import type {RootLoaderData} from "~/root"
+import {loader} from "~/root"
 
 const Navigation: FC = () => {
-    const {user} = useLoaderData<RootLoaderData>()
+    const {user} = useLoaderData<typeof loader>()
 
     return (
         <nav className="flex gap-4 font-bold">
