@@ -1,4 +1,5 @@
-import {Todos, Users, getXataClient} from "~/xata"
+import type {Todos, Users} from "~/xata"
+import {getXataClient} from "~/xata"
 
 const createTodo = async (userId: Users["id"], content: Todos["content"]) => {
     const xata = getXataClient()

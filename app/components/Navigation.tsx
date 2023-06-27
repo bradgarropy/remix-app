@@ -1,6 +1,7 @@
 import {Form, NavLink, useLoaderData} from "@remix-run/react"
 import type {FC} from "react"
-import {loader} from "~/root"
+
+import type {loader} from "~/root"
 
 const Navigation: FC = () => {
     const {user} = useLoaderData<typeof loader>()

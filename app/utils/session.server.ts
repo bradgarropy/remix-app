@@ -1,7 +1,7 @@
 import {redirect} from "@remix-run/node"
 
 import {sessionStorage} from "~/utils/sessionStorage.server"
-import {Users} from "~/xata"
+import type {Users} from "~/xata"
 
 const getSession = (request: Request) => {
     const cookie = request.headers.get("Cookie")

@@ -1,8 +1,8 @@
 import {redirect} from "@remix-run/node"
 import {compare, hash} from "bcryptjs"
-import {getXataClient} from "~/xata"
 
 import {deleteSession, getUserIdFromSession} from "~/utils/session.server"
+import {getXataClient} from "~/xata"
 
 type Credentials = {
     email: string
