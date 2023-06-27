@@ -11,7 +11,7 @@ import {
 
 import Footer from "~/components/Footer"
 import Header from "~/components/Header"
-import tailwindStyles from "~/styles/tailwind.css"
+import tailwindStyles from "~/styles/app.css"
 import {getUser} from "~/utils/auth.server"
 
 export const meta: V2_MetaFunction = () => {
