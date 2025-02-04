@@ -1,7 +1,7 @@
 {
-    "name": "remix-starter",
+    "name": "remix-app",
     "version": "4.7.0",
-    "description": "💿 remix starter",
+    "description": "💿 remix app",
     "type": "module",
     "keywords": [
         "typescript",
@@ -15,9 +15,9 @@
         "tailwind",
         "hacktoberfest"
     ],
-    "homepage": "https://github.com/bradgarropy/remix-starter",
+    "homepage": "https://github.com/bradgarropy/remix-app",
     "bugs": {
-        "url": "https://github.com/bradgarropy/remix-starter/issues"
+        "url": "https://github.com/bradgarropy/remix-app/issues"
     },
     "license": "MIT",
     "author": {
@@ -27,7 +27,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/bradgarropy/remix-starter"
+        "url": "https://github.com/bradgarropy/remix-app"
     },
     "scripts": {
         "dev": "remix vite:dev",

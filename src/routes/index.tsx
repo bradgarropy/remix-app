@@ -2,7 +2,7 @@ import type {MetaFunction} from "@remix-run/node"
 
 export const meta: MetaFunction = () => [
     {
-        title: "💿 remix starter | home",
+        title: "💿 remix app | home",
     },
 ]
 
