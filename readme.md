@@ -10,7 +10,7 @@ _A [Remix][remix] starter application with [ESLint][eslint], [Prettier][prettier
 [![discord][discord-badge]][discord]
 
 <p align="center">
-    <a href="https://remix-app-bradgarropy.vercel.app">
+    <a href="https://remix-app-brad-garropys-projects.vercel.app">
         <img alt="remix app" src="./public/github.png" width="800">
     </a>
 </p>
