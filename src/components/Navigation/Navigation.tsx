@@ -11,6 +11,18 @@ const Navigation = () => {
                 About
             </NavLink>
 
+            <NavLink to="/dashboard" prefetch="intent">
+                Dashboard
+            </NavLink>
+
+            <NavLink to="/signup" prefetch="intent">
+                Sign up
+            </NavLink>
+
+            <NavLink to="/signin" prefetch="intent">
+                Sign in
+            </NavLink>
+
             <NavLink to="/sentry/frontend" prefetch="intent">
                 Frontend
             </NavLink>
