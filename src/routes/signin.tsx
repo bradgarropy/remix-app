@@ -1,5 +1,7 @@
 import type {ActionFunctionArgs, MetaFunction} from "@remix-run/node"
-import {Form, redirect} from "@remix-run/react"
+import {Form} from "@remix-run/react"
+
+import {signIn} from "~/utils/auth.server"
 
 export const meta: MetaFunction = () => [
     {
@@ -10,11 +12,10 @@ export const meta: MetaFunction = () => [
 export const action = async ({request}: ActionFunctionArgs) => {
     const formData = await request.formData()
 
-    const email = formData.get("email")
-    const password = formData.get("password")
+    const email = String(formData.get("email"))
+    const password = String(formData.get("password"))
 
-    console.log({email, password})
-    return redirect("/dashboard")
+    return signIn({request, email, password})
 }
 
 const Route = () => {
