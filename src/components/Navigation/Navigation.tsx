@@ -27,16 +27,8 @@ const Navigation = () => {
                 Sign out
             </NavLink>
 
-            <NavLink to="/sentry/frontend" prefetch="intent">
-                Frontend
-            </NavLink>
-
-            <NavLink to="/sentry/loader" prefetch="intent">
-                Loader
-            </NavLink>
-
-            <NavLink to="/sentry/action" prefetch="intent">
-                Action
+            <NavLink to="/sentry" prefetch="intent">
+                Sentry
             </NavLink>
         </nav>
     )
