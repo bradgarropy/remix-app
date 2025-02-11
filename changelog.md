@@ -36,6 +36,12 @@ _YYYY-MM-DD_
 
 - _TBD_
 
+## [0.0.3][0.0.3]
+
+_2025-02-10_
+
+- Add authentication utilities
+
 ## [0.0.2][0.0.2]
 
 _2025-02-10_
@@ -50,7 +56,8 @@ _2025-02-04_
 
 [keep-a-changelog]: https://keepachangelog.com
 [semver]: https://semver.org
-[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.2...HEAD
+[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.3...HEAD
+[0.0.3]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.3
 [0.0.2]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.2
 [0.0.1]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.1
 [remix-starter]: https://github.com/bradgarropy/remix-starter
