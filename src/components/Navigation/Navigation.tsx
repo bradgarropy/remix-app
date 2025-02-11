@@ -23,6 +23,10 @@ const Navigation = () => {
                 Sign in
             </NavLink>
 
+            <NavLink to="/signout" prefetch="none">
+                Sign out
+            </NavLink>
+
             <NavLink to="/sentry/frontend" prefetch="intent">
                 Frontend
             </NavLink>

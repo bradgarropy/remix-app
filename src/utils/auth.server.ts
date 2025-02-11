@@ -1,4 +1,5 @@
 import type {User} from "@prisma/client"
+import {redirect} from "@remix-run/node"
 import bcrypt from "bcryptjs"
 
 import {
@@ -31,10 +32,7 @@ const signUp = async ({
         throw new Error("Passwords do not match")
     }
 
-    const salt = await bcrypt.genSalt()
-    const hashedPassword = await bcrypt.hash(password, salt)
-
-    const user = await createUser({email, password: hashedPassword})
+    const user = await createUser({email, password})
 
     console.log(`${user.email} signed up`)
     return createSession({request, userId: user.id})
@@ -78,4 +76,15 @@ const signOut = async ({request}: SignOutParams) => {
     return deleteSession(request)
 }
 
-export {signIn, signOut, signUp}
+const requireUser = async (request: Request) => {
+    const user = await getUserFromSession(request)
+
+    if (!user) {
+        console.log(redirect("/signin"))
+        throw redirect("/signin")
+    }
+
+    return user
+}
+
+export {requireUser, signIn, signOut, signUp}

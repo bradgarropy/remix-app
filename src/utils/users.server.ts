@@ -1,4 +1,5 @@
 import type {User} from "@prisma/client"
+import bcrypt from "bcryptjs"
 
 import {db} from "~/utils/database.server"
 
@@ -18,7 +19,10 @@ type CreateUserParams = {
 }
 
 const createUser = async ({email, password}: CreateUserParams) => {
-    const user = await db.user.create({data: {email, password}})
+    const salt = await bcrypt.genSalt()
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+    const user = await db.user.create({data: {email, password: hashedPassword}})
     return user
 }
 
