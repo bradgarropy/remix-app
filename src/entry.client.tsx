@@ -6,8 +6,8 @@ import {hydrateRoot} from "react-dom/client"
 import {createRelease} from "~/utils/sentry"
 
 Sentry.init({
-    dsn: import.meta.env.VITE_SENTRY_DSN,
-    environment: import.meta.env.MODE,
+    dsn: process.env.VITE_SENTRY_DSN,
+    environment: process.env.MODE,
     release: createRelease(),
 })
 
