@@ -1,8 +1,9 @@
+import {redirect} from "@remix-run/node"
 import bcrypt from "bcryptjs"
 import {describe, expect, test, vitest} from "vitest"
 
 import {mockUser} from "~/mocks/users"
-import {signIn, signOut, signUp} from "~/utils/auth.server"
+import {requireUser, signIn, signOut, signUp} from "~/utils/auth.server"
 import * as session from "~/utils/session.server"
 import * as users from "~/utils/users.server"
 
@@ -146,5 +147,26 @@ describe("signOut", () => {
 
         expect(deleteSessionSpy).toHaveBeenCalledTimes(1)
         expect(deleteSessionSpy).toHaveBeenLastCalledWith(request)
+    })
+})
+
+describe("requireUser", () => {
+    test("requires user", async () => {
+        getUserFromSessionSpy.mockResolvedValueOnce(mockUser)
+
+        const request = new Request("http://example.com")
+
+        const user = await requireUser(request)
+        expect(user).toEqual(mockUser)
+    })
+
+    test("handles no user", async () => {
+        getUserFromSessionSpy.mockResolvedValueOnce(null)
+
+        const request = new Request("http://example.com")
+
+        await expect(() => requireUser(request)).rejects.toEqual(
+            redirect("/signin"),
+        )
     })
 })
