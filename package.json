@@ -33,6 +33,11 @@
         "dev": "remix vite:dev",
         "build": "remix vite:build",
         "start": "remix-serve build/server/index.js",
+        "db:generate": "prisma generate",
+        "db:migrate": "prisma migrate dev",
+        "db:view": "prisma studio",
+        "db:seed": "tsx prisma/seed.ts",
+        "db:reset": "prisma migrate reset",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "format": "prettier --check .",
@@ -47,6 +52,7 @@
         "new": "plop"
     },
     "dependencies": {
+        "@prisma/client": "^6.3.1",
         "@remix-run/node": "^2.2.0",
         "@remix-run/react": "^2.2.0",
         "@remix-run/vercel": "^1.19.3",
@@ -80,15 +86,21 @@
         "plop": "^4.0.0",
         "prettier": "^3.1.0",
         "prettier-plugin-tailwindcss": "^0.6.11",
+        "prisma": "^6.3.1",
         "remix-development-tools": "^4.7.7",
         "tailwindcss": "^4.0.0",
+        "tsx": "^4.19.2",
         "typescript": "^5.0.4",
         "vite": "^6.0.3",
         "vite-tsconfig-paths": "^5.0.1",
-        "vitest": "^3.0.4"
+        "vitest": "^3.0.4",
+        "vitest-mock-extended": "^2.0.2"
     },
     "engines": {
         "node": ">=14"
     },
-    "sideEffects": false
+    "sideEffects": false,
+    "prisma": {
+        "seed": "tsx prisma/seed.ts"
+    }
 }
