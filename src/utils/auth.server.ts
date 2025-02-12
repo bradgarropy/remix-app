@@ -1,7 +1,9 @@
 import type {User} from "@prisma/client"
 import {redirect} from "@remix-run/node"
+import {useRouteLoaderData} from "@remix-run/react"
 import bcrypt from "bcryptjs"
 
+import type {loader as rootLoader} from "~/root"
 import {
     createSession,
     deleteSession,
@@ -87,4 +89,15 @@ const requireUser = async (request: Request) => {
     return user
 }
 
-export {requireUser, signIn, signOut, signUp}
+const useAuth = () => {
+    const data = useRouteLoaderData<typeof rootLoader>("root")
+
+    if (!data) {
+        return null
+    }
+
+    const {user} = data
+    return user
+}
+
+export {requireUser, signIn, signOut, signUp, useAuth}
