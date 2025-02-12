@@ -36,6 +36,12 @@ _YYYY-MM-DD_
 
 - _TBD_
 
+## [0.0.5][0.0.5]
+
+_2025-02-11_
+
+- Navigation based on authentication state
+
 ## [0.0.4][0.0.4]
 
 _2025-02-11_
@@ -62,7 +68,8 @@ _2025-02-04_
 
 [keep-a-changelog]: https://keepachangelog.com
 [semver]: https://semver.org
-[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.4...HEAD
+[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.5...HEAD
+[0.0.5]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.5
 [0.0.4]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.4
 [0.0.3]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.3
 [0.0.2]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.2
