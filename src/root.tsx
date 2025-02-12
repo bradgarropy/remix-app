@@ -1,4 +1,8 @@
-import type {LinksFunction, MetaFunction} from "@remix-run/node"
+import type {
+    LinksFunction,
+    LoaderFunctionArgs,
+    MetaFunction,
+} from "@remix-run/node"
 import {Links, Meta, Outlet, Scripts, ScrollRestoration} from "@remix-run/react"
 import {withSentry} from "@sentry/remix"
 
@@ -6,6 +10,7 @@ import Error from "~/components/ErrorBoundary"
 import Footer from "~/components/Footer"
 import Header from "~/components/Header"
 import tailwindStyles from "~/styles/tailwind.css?url"
+import {getUserFromSession} from "~/utils/session.server"
 
 export const meta: MetaFunction = () => [
     {charset: "utf-8"},
@@ -22,6 +27,11 @@ export const links: LinksFunction = () => {
     ]
 
     return links
+}
+
+export const loader = async ({request}: LoaderFunctionArgs) => {
+    const user = await getUserFromSession(request)
+    return {user}
 }
 
 const App = () => {

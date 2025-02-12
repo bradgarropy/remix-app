@@ -9,6 +9,7 @@ const routes: RouteConfig = [
     route("signup", "./routes/signup.tsx"),
     route("signout", "./routes/signout.tsx"),
     route("api/hello", "./routes/api/hello.tsx"),
+    route("sentry", "./routes/sentry.tsx"),
     route("sentry/frontend", "./routes/sentryFrontend.tsx"),
     route("sentry/loader", "./routes/sentryLoader.tsx"),
     route("sentry/action", "./routes/sentryAction.tsx"),
