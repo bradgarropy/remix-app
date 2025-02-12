@@ -1,17 +1,9 @@
 import {redirect} from "@remix-run/node"
-import * as remix from "@remix-run/react"
-import {renderHook} from "@testing-library/react"
 import bcrypt from "bcryptjs"
 import {describe, expect, test, vitest} from "vitest"
 
 import {mockUser} from "~/mocks/users"
-import {
-    requireUser,
-    signIn,
-    signOut,
-    signUp,
-    useAuth,
-} from "~/utils/auth.server"
+import {requireUser, signIn, signOut, signUp} from "~/utils/auth.server"
 import * as session from "~/utils/session.server"
 import * as users from "~/utils/users.server"
 
@@ -21,7 +13,6 @@ const createSessionSpy = vitest.spyOn(session, "createSession")
 const deleteSessionSpy = vitest.spyOn(session, "deleteSession")
 const getUserFromSessionSpy = vitest.spyOn(session, "getUserFromSession")
 const compareSpy = vitest.spyOn(bcrypt, "compare")
-const useRouteLoaderDataSpy = vitest.spyOn(remix, "useRouteLoaderData")
 
 describe("signUp", () => {
     test("user signs up", async () => {
@@ -177,21 +168,5 @@ describe("requireUser", () => {
         await expect(() => requireUser(request)).rejects.toEqual(
             redirect("/signin"),
         )
-    })
-})
-
-describe("useAuth", () => {
-    test("uses authentication", () => {
-        useRouteLoaderDataSpy.mockReturnValueOnce({user: mockUser})
-
-        const {result} = renderHook(() => useAuth())
-        expect(result.current).toEqual(mockUser)
-    })
-
-    test("handles no user", () => {
-        useRouteLoaderDataSpy.mockReturnValueOnce(null)
-
-        const {result} = renderHook(() => useAuth())
-        expect(result.current).toEqual(null)
     })
 })

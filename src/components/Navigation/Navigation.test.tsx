@@ -2,7 +2,7 @@ import {render, screen} from "@testing-library/react"
 import {MemoryRouter} from "react-router-dom"
 import {expect, test, vitest} from "vitest"
 
-import * as auth from "~/utils/auth.server"
+import * as auth from "~/utils/auth"
 
 const useAuthSpy = vitest.spyOn(auth, "useAuth")
 

@@ -1,6 +1,6 @@
 import {NavLink} from "@remix-run/react"
 
-import {useAuth} from "~/utils/auth.server"
+import {useAuth} from "~/utils/auth"
 
 const Navigation = () => {
     const user = useAuth()
