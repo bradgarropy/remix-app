@@ -5,7 +5,7 @@ import {signIn} from "~/utils/auth.server"
 
 export const meta: MetaFunction = () => [
     {
-        title: "💿 remix app | signin",
+        title: "💿 remix app | sign in",
     },
 ]
 

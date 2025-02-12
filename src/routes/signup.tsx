@@ -5,7 +5,7 @@ import {signUp} from "~/utils/auth.server"
 
 export const meta: MetaFunction = () => [
     {
-        title: "💿 remix app | signup",
+        title: "💿 remix app | sign up",
     },
 ]
 
@@ -33,6 +33,7 @@ const Route = () => {
                     type="email"
                     className="px-4 py-2 border-2 border-black rounded-md mb-4"
                 />
+
                 <label htmlFor="password">Password</label>
                 <input
                     required
@@ -42,7 +43,8 @@ const Route = () => {
                     autoComplete="new-password"
                     className="px-4 py-2 border-2 border-black rounded-md mb-4"
                 />
-                <label htmlFor="password">Confirm password</label>{" "}
+
+                <label htmlFor="passwordConfirmation">Confirm password</label>
                 <input
                     required
                     id="passwordConfirmation"
@@ -51,6 +53,7 @@ const Route = () => {
                     autoComplete="new-password"
                     className="px-4 py-2 border-2 border-black rounded-md mb-4"
                 />
+
                 <button
                     type="submit"
                     className="bg-black text-white px-4 py-2 rounded-md font-bold hover:bg-purple-500"
