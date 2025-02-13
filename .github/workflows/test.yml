@@ -31,6 +31,11 @@ jobs:
                   npm run build
                   npm run db:reset -- --force
                   npm run test:e2e
+            - name: "📤 artifact"
+              uses: actions/upload-artifact@v4
+              with:
+                  name: playwright-report
+                  path: playwright-report
             - name: "☂️ coverage"
               uses: codecov/codecov-action@v5
               with:
