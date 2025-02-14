@@ -37,10 +37,10 @@ const createSession = async ({request, userId}: CreateSessionParams) => {
     session.set("userId", userId)
     console.log(`set userId: ${userId}`)
 
-    const cookie = await sessionStorage.commitSession(session, {
-        // https://github.com/remix-run/indie-stack/blob/main/app/session.server.ts#L66
-    })
-    console.log(`set cookie: ${cookie}`)
+    // const cookie = await sessionStorage.commitSession(session, {
+    //     // https://github.com/remix-run/indie-stack/blob/main/app/session.server.ts#L66
+    // })
+    console.log(`set cookie: ${"fjkdsla"}`)
 
     return redirect("/dashboard", {
         status: 303,
