@@ -44,7 +44,7 @@ const createSession = async ({request, userId}: CreateSessionParams) => {
 
     return redirect("/dashboard", {
         status: 303,
-        headers: {"set-cookie": cookie},
+        headers: {"set-cookie": "fjslkd"},
     })
 }
 
