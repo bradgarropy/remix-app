@@ -12,9 +12,9 @@ const sessionStorage = createCookieSessionStorage<UserSession>({
         name: "__session",
         httpOnly: true,
         path: "/",
-        sameSite: "lax",
+        sameSite: false,
         secrets: [process.env.SESSION_SECRET!],
-        secure: process.env.NODE_ENV === "production",
+        secure: false,
     },
 })
 
