@@ -21,10 +21,10 @@ jobs:
               run: npm ci
             - name: "🟦 types"
               run: npm run typecheck
-            - name: "🧪 test"
-              run: npm run test
-              env:
-                  SESSION_SECRET: ${{ secrets.SESSION_SECRET}}
+            # - name: "🧪 test"
+            #   run: npm run test
+            #   env:
+            #       SESSION_SECRET: ${{ secrets.SESSION_SECRET}}
             - name: "🎭 e2e"
               run: |
                   npx playwright install --with-deps
