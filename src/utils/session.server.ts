@@ -43,6 +43,7 @@ const createSession = async ({request, userId}: CreateSessionParams) => {
     console.log(`set cookie: ${cookie}`)
 
     return redirect("/dashboard", {
+        status: 303,
         headers: {"set-cookie": cookie},
     })
 }
