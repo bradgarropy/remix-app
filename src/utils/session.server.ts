@@ -19,6 +19,7 @@ const sessionStorage = createCookieSessionStorage<UserSession>({
 })
 
 const getSession = async (request: Request) => {
+    console.log("getSession")
     const cookie = request.headers.get("Cookie")
     const session = await sessionStorage.getSession(cookie)
 
@@ -34,10 +35,12 @@ const createSession = async ({request, userId}: CreateSessionParams) => {
     console.log("createSession")
     const session = await getSession(request)
     session.set("userId", userId)
+    console.log(`set userId: ${userId}`)
 
     const cookie = await sessionStorage.commitSession(session, {
         // https://github.com/remix-run/indie-stack/blob/main/app/session.server.ts#L66
     })
+    console.log(`set cookie: ${cookie}`)
 
     return redirect("/dashboard", {headers: {"set-cookie": cookie}})
 }
