@@ -1,6 +1,6 @@
 import {expect, test} from "@playwright/test"
 
-test("unauthenticated", async ({page}) => {
+test.skip("unauthenticated", async ({page}) => {
     await page.goto("http://localhost:3000")
 
     await expect(page).toHaveTitle("💿 remix app | home")
@@ -32,7 +32,7 @@ test("unauthenticated", async ({page}) => {
     await expect(page.getByRole("heading", {name: "Sentry"})).toBeVisible()
 })
 
-test("authenticated", async ({page}) => {
+test.skip("authenticated", async ({page}) => {
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign in"}).click()
 

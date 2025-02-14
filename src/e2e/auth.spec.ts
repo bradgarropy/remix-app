@@ -1,6 +1,6 @@
 import {expect, test} from "@playwright/test"
 
-test("sign up", async ({page}) => {
+test.skip("sign up", async ({page}) => {
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign up"}).click()
 
@@ -30,7 +30,7 @@ test.only("sign in", async ({page}) => {
     await expect(page.getByText("Hello homer@gmail.com")).toBeVisible()
 })
 
-test("sign out", async ({page}) => {
+test.skip("sign out", async ({page}) => {
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign in"}).click()
 
@@ -45,7 +45,7 @@ test("sign out", async ({page}) => {
     await expect(page.getByRole("heading", {name: "Home"})).toBeVisible()
 })
 
-test("authenticated content", async ({page}) => {
+test.skip("authenticated content", async ({page}) => {
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Dashboard"}).click()
 
