@@ -31,6 +31,7 @@ type CreateSessionParams = {
 }
 
 const createSession = async ({request, userId}: CreateSessionParams) => {
+    console.log("createSession")
     const session = await getSession(request)
     session.set("userId", userId)
 

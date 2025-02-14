@@ -45,6 +45,7 @@ type SignInParams = {
 }
 
 const signIn = async ({request, email, password}: SignInParams) => {
+    console.log("signIn")
     const user = await getUserByEmail(email)
 
     if (!user) {
