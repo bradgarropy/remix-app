@@ -30,7 +30,7 @@ jobs:
                   npx playwright install --with-deps
                   npm run build
                   npm run db:reset -- --force
-                  npm run test:e2e
+                  DEBUG=pw:browser,pw:api,pw:webserver npm run test:e2e
             - name: "📤 artifact"
               uses: actions/upload-artifact@v4
               if: ${{ !cancelled() }}
