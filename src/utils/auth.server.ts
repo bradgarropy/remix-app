@@ -35,16 +35,22 @@ const signUp = async ({
     const user = await createUser({email, password})
 
     console.log(`${user.email} signed up`)
-    return createSession({request, userId: user.id})
+    return createSession({request, userId: user.id, redirectUrl: "/"})
 }
 
 type SignInParams = {
     request: Request
     email: User["email"]
     password: User["password"]
+    redirectUrl: string
 }
 
-const signIn = async ({request, email, password}: SignInParams) => {
+const signIn = async ({
+    request,
+    email,
+    password,
+    redirectUrl,
+}: SignInParams) => {
     const user = await getUserByEmail(email)
 
     if (!user) {
@@ -58,7 +64,7 @@ const signIn = async ({request, email, password}: SignInParams) => {
     }
 
     console.log(`${user.email} signed in`)
-    return createSession({request, userId: user.id})
+    return createSession({request, userId: user.id, redirectUrl})
 }
 
 type SignOutParams = {
@@ -77,11 +83,11 @@ const signOut = async ({request}: SignOutParams) => {
 }
 
 const requireUser = async (request: Request) => {
+    const url = new URL(request.url)
     const user = await getUserFromSession(request)
 
     if (!user) {
-        console.log(redirect("/signin"))
-        throw redirect("/signin")
+        throw redirect(`/signin?redirectUrl=${url.pathname}`)
     }
 
     return user
