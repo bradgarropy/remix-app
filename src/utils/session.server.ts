@@ -28,20 +28,21 @@ const getSession = async (request: Request) => {
 type CreateSessionParams = {
     request: Request
     userId: User["id"]
+    remember?: boolean
     redirectUrl: string
 }
 
 const createSession = async ({
     request,
     userId,
+    remember = false,
     redirectUrl,
 }: CreateSessionParams) => {
     const session = await getSession(request)
     session.set("userId", userId)
 
-    const cookie = await sessionStorage.commitSession(session, {
-        // https://github.com/remix-run/indie-stack/blob/main/app/session.server.ts#L66
-    })
+    const maxAge = remember ? 60 * 60 * 24 * 7 : undefined
+    const cookie = await sessionStorage.commitSession(session, {maxAge})
 
     return redirect(redirectUrl, {headers: {"set-cookie": cookie}})
 }
