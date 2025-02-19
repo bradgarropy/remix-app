@@ -33,6 +33,7 @@ describe("signUp", () => {
         expect(createSessionSpy).toHaveBeenLastCalledWith({
             request,
             userId: mockUser.id,
+            redirectUrl: "/",
         })
     })
 
@@ -84,6 +85,7 @@ describe("signIn", () => {
             request,
             email: mockUser.email,
             password: "password",
+            redirectUrl: "/",
         })
 
         expect(createSessionSpy).toHaveBeenCalledTimes(1)
@@ -91,6 +93,7 @@ describe("signIn", () => {
         expect(createSessionSpy).toHaveBeenLastCalledWith({
             request,
             userId: mockUser.id,
+            redirectUrl: "/",
         })
     })
 
@@ -103,6 +106,7 @@ describe("signIn", () => {
             request,
             email: mockUser.email,
             password: "password",
+            redirectUrl: "/",
         })
 
         await expect(signInPromise).rejects.toThrowError("User not found")
@@ -120,6 +124,7 @@ describe("signIn", () => {
             request,
             email: mockUser.email,
             password: "password",
+            redirectUrl: "/",
         })
 
         await expect(signInPromise).rejects.toThrowError("Invalid password")
@@ -166,7 +171,7 @@ describe("requireUser", () => {
         const request = new Request("http://example.com")
 
         await expect(() => requireUser(request)).rejects.toEqual(
-            redirect("/signin"),
+            redirect("/signin?redirectUrl=/"),
         )
     })
 })

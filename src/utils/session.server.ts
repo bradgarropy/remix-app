@@ -28,9 +28,14 @@ const getSession = async (request: Request) => {
 type CreateSessionParams = {
     request: Request
     userId: User["id"]
+    redirectUrl: string
 }
 
-const createSession = async ({request, userId}: CreateSessionParams) => {
+const createSession = async ({
+    request,
+    userId,
+    redirectUrl,
+}: CreateSessionParams) => {
     const session = await getSession(request)
     session.set("userId", userId)
 
@@ -38,7 +43,7 @@ const createSession = async ({request, userId}: CreateSessionParams) => {
         // https://github.com/remix-run/indie-stack/blob/main/app/session.server.ts#L66
     })
 
-    return redirect("/dashboard", {headers: {"set-cookie": cookie}})
+    return redirect(redirectUrl, {headers: {"set-cookie": cookie}})
 }
 
 const deleteSession = async (request: Request) => {
