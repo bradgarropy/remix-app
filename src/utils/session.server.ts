@@ -29,23 +29,24 @@ const getSession = async (request: Request) => {
 type CreateSessionParams = {
     request: Request
     userId: User["id"]
+    remember?: boolean
+    redirectUrl: string
 }
 
-const createSession = async ({request, userId}: CreateSessionParams) => {
-    console.log("createSession")
+const createSession = async ({
+    request,
+    userId,
+    remember = false,
+    redirectUrl,
+}: CreateSessionParams) => {
     const session = await getSession(request)
     session.set("userId", userId)
     console.log(`set userId: ${userId}`)
 
-    // const cookie = await sessionStorage.commitSession(session, {
-    //     // https://github.com/remix-run/indie-stack/blob/main/app/session.server.ts#L66
-    // })
-    console.log(`set cookie: ${"fjkdsla"}`)
+    const maxAge = remember ? 60 * 60 * 24 * 7 : undefined
+    const cookie = await sessionStorage.commitSession(session, {maxAge})
 
-    return redirect("/dashboard", {
-        status: 303,
-        headers: {"set-cookie": "fjslkd"},
-    })
+    return redirect(redirectUrl, {headers: {"set-cookie": cookie}})
 }
 
 const deleteSession = async (request: Request) => {

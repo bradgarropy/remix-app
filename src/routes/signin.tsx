@@ -1,5 +1,5 @@
 import type {ActionFunctionArgs, MetaFunction} from "@remix-run/node"
-import {Form} from "@remix-run/react"
+import {Form, useSearchParams} from "@remix-run/react"
 
 import {signIn} from "~/utils/auth.server"
 
@@ -15,11 +15,15 @@ export const action = async ({request}: ActionFunctionArgs) => {
 
     const email = String(formData.get("email"))
     const password = String(formData.get("password"))
+    const redirectUrl = String(formData.get("redirectUrl")) || "/"
 
-    return signIn({request, email, password})
+    return signIn({request, email, password, redirectUrl})
 }
 
 const Route = () => {
+    const [searchParams] = useSearchParams()
+    const redirectUrl = searchParams.get("redirectUrl")
+
     return (
         <>
             <h2 className="text-2xl font-bold mb-8">Sign in</h2>
@@ -42,6 +46,12 @@ const Route = () => {
                     type="password"
                     autoComplete="new-password"
                     className="px-4 py-2 border-2 border-black rounded-md mb-4"
+                />
+
+                <input
+                    type="hidden"
+                    name="redirectUrl"
+                    value={redirectUrl ?? undefined}
                 />
 
                 <button
