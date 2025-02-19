@@ -35,7 +35,13 @@ const signUp = async ({
     const user = await createUser({email, password})
 
     console.log(`${user.email} signed up`)
-    return createSession({request, userId: user.id, redirectUrl: "/"})
+
+    return createSession({
+        request,
+        userId: user.id,
+        remember: false,
+        redirectUrl: "/",
+    })
 }
 
 type SignInParams = {
@@ -64,7 +70,13 @@ const signIn = async ({
     }
 
     console.log(`${user.email} signed in`)
-    return createSession({request, userId: user.id, redirectUrl})
+
+    return createSession({
+        request,
+        userId: user.id,
+        remember: true,
+        redirectUrl,
+    })
 }
 
 type SignOutParams = {

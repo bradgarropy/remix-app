@@ -33,6 +33,7 @@ describe("signUp", () => {
         expect(createSessionSpy).toHaveBeenLastCalledWith({
             request,
             userId: mockUser.id,
+            remember: false,
             redirectUrl: "/",
         })
     })
@@ -93,6 +94,7 @@ describe("signIn", () => {
         expect(createSessionSpy).toHaveBeenLastCalledWith({
             request,
             userId: mockUser.id,
+            remember: true,
             redirectUrl: "/",
         })
     })
