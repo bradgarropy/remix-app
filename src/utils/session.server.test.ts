@@ -28,6 +28,29 @@ describe("createSession", () => {
         expect(response.status).toEqual(302)
         expect(location).toEqual("/")
         expect(cookie).toContain("__session")
+        expect(cookie).not.toContain("Max-Age=604800")
+        expect(cookie).toContain("Path=/")
+        expect(cookie).toContain("HttpOnly")
+        expect(cookie).toContain("SameSite=Lax")
+    })
+
+    test("remembers a session", async () => {
+        const request = new Request("https://example.com")
+
+        const response = await createSession({
+            request,
+            userId: mockUser.id,
+            remember: true,
+            redirectUrl: "/",
+        })
+
+        const location = response.headers.get("location")
+        const cookie = response.headers.get("set-cookie")
+
+        expect(response.status).toEqual(302)
+        expect(location).toEqual("/")
+        expect(cookie).toContain("__session")
+        expect(cookie).toContain("Max-Age=604800")
         expect(cookie).toContain("Path=/")
         expect(cookie).toContain("HttpOnly")
         expect(cookie).toContain("SameSite=Lax")
