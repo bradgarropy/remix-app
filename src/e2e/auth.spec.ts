@@ -19,7 +19,7 @@ test("sign up", async ({page}) => {
     await expect(page.getByText("Home")).toBeVisible()
 })
 
-test("sign in", async ({page}) => {
+test.only("sign in", async ({page}) => {
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign in"}).click()
 
@@ -28,9 +28,10 @@ test("sign in", async ({page}) => {
     await page.getByRole("button", {name: "Sign in"}).click()
 
     await expect(page.getByText("Home")).toBeVisible()
+    await page.getByRole("link", {name: "Sign out"}).click()
 })
 
-test.only("sign out", async ({page}) => {
+test("sign out", async ({page}) => {
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign in"}).click()
 
