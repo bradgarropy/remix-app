@@ -1,6 +1,7 @@
 import {expect, test} from "@playwright/test"
 
 test("sign up", async ({page}) => {
+    console.log("SIGN UP TEST")
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign up"}).click()
 
@@ -20,6 +21,7 @@ test("sign up", async ({page}) => {
 })
 
 test.only("sign in", async ({page}) => {
+    console.log("SIGN IN TEST")
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign in"}).click()
 

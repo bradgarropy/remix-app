@@ -23,7 +23,6 @@ const getSession = async (request: Request) => {
     const cookie = request.headers.get("Cookie")
     console.log({cookie})
     const session = await sessionStorage.getSession(cookie)
-    console.log({session})
 
     return session
 }
@@ -43,7 +42,6 @@ const createSession = async ({
 }: CreateSessionParams) => {
     console.log("createSession")
     const session = await getSession(request)
-    console.log({session})
     session.set("userId", userId)
     console.log(`set userId: ${userId}`)
 
@@ -65,7 +63,6 @@ const deleteSession = async (request: Request) => {
 const getUserFromSession = async (request: Request) => {
     console.log("getUserFromSession")
     const session = await getSession(request)
-    console.log({session})
     const userId = session.get("userId")
     console.log({userId})
 
