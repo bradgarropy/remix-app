@@ -3,7 +3,7 @@ import {Link} from "@remix-run/react"
 
 export const meta: MetaFunction = () => [
     {
-        title: "remix app | sentry",
+        title: "💿 remix app | sentry",
     },
 ]
 

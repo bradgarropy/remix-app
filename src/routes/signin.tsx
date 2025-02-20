@@ -5,11 +5,12 @@ import {signIn} from "~/utils/auth.server"
 
 export const meta: MetaFunction = () => [
     {
-        title: "💿 remix app | signin",
+        title: "💿 remix app | sign in",
     },
 ]
 
 export const action = async ({request}: ActionFunctionArgs) => {
+    console.log("SIGN IN ACTION")
     const formData = await request.formData()
 
     const email = String(formData.get("email"))
