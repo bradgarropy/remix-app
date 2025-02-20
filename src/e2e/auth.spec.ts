@@ -29,7 +29,7 @@ test.only("sign in", async ({page}) => {
     await page.getByRole("textbox", {name: "Password"}).fill("password")
     await page.getByRole("button", {name: "Sign in"}).click()
 
-    await expect(page.getByText("Home")).toBeVisible()
+    await expect(page.getByRole("heading", {name: "Home"})).toBeVisible()
     await expect(page.getByRole("link", {name: "Sign out"})).toBeVisible()
 })
 
