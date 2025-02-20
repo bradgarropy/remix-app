@@ -30,7 +30,7 @@ test.only("sign in", async ({page}) => {
     await expect(page.getByText("Home")).toBeVisible()
 })
 
-test.only("sign out", async ({page}) => {
+test("sign out", async ({page}) => {
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign in"}).click()
 
@@ -45,7 +45,7 @@ test.only("sign out", async ({page}) => {
     await expect(page.getByRole("heading", {name: "Home"})).toBeVisible()
 })
 
-test("authenticated content", async ({page}) => {
+test.only("authenticated content", async ({page}) => {
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Dashboard"}).click()
 
