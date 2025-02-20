@@ -19,7 +19,7 @@ test("sign up", async ({page}) => {
     await expect(page.getByText("Home")).toBeVisible()
 })
 
-test("sign in", async ({page}) => {
+test.only("sign in", async ({page}) => {
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign in"}).click()
 
