@@ -59,14 +59,19 @@ const deleteSession = async (request: Request) => {
 }
 
 const getUserFromSession = async (request: Request) => {
+    console.log("getUserFromSession")
     const session = await getSession(request)
+    console.log({session})
     const userId = session.get("userId")
+    console.log({userId})
 
     if (!userId) {
+        console.log("no userId")
         return null
     }
 
     const user = await getUserById(userId)
+    console.log({user})
     return user
 }
 
