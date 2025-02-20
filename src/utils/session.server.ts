@@ -39,14 +39,16 @@ const createSession = async ({
     remember = false,
     redirectUrl,
 }: CreateSessionParams) => {
+    console.log("createSession")
     const session = await getSession(request)
+    console.log({session})
     session.set("userId", userId)
     console.log(`set userId: ${userId}`)
 
     const maxAge = remember ? 60 * 60 * 24 * 7 : undefined
     const cookie = await sessionStorage.commitSession(session, {maxAge})
 
-    console.log("cookie", cookie)
+    console.log({cookie})
 
     return redirect(redirectUrl, {headers: {"set-cookie": cookie}})
 }
