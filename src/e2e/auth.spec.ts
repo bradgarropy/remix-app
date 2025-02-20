@@ -34,6 +34,7 @@ test.only("sign in", async ({page}) => {
 })
 
 test("sign out", async ({page}) => {
+    console.log("SIGN OUT TEST")
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign in"}).click()
 
@@ -49,6 +50,7 @@ test("sign out", async ({page}) => {
 })
 
 test("authenticated content", async ({page}) => {
+    console.log("AUTHENTICATED CONTENT TEST")
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Dashboard"}).click()
 
