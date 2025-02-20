@@ -40,7 +40,7 @@ test.only("sign out", async ({page}) => {
 
     await expect(page.getByText("Home")).toBeVisible()
 
-    // await page.getByRole("link", {name: "Sign out"}).click()
+    await page.getByRole("link", {name: "Sign out"}).click()
 
     // await expect(page.getByRole("heading", {name: "Home"})).toBeVisible()
 })
