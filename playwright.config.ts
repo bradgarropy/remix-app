@@ -5,7 +5,7 @@ const config = defineConfig({
     fullyParallel: true,
     // forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 0 : 0,
-    workers: process.env.CI ? 1 : undefined,
+    // workers: process.env.CI ? 1 : undefined,
     reporter: "html",
     use: {
         trace: "on-first-retry",
@@ -27,7 +27,7 @@ const config = defineConfig({
     webServer: {
         command: "npm start",
         url: "http://localhost:3000",
-        reuseExistingServer: !process.env.CI,
+        // reuseExistingServer: !process.env.CI,
     },
 })
 
