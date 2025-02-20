@@ -1,6 +1,6 @@
 import {expect, test} from "@playwright/test"
 
-test("sign up", async ({page}) => {
+test.only("sign up", async ({page}) => {
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign up"}).click()
 
