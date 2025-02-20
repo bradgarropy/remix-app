@@ -10,7 +10,7 @@ export const meta: MetaFunction = () => [
 ]
 
 export const action = async ({request}: ActionFunctionArgs) => {
-    console.log("action")
+    console.log("SIGN IN ACTION")
     const formData = await request.formData()
 
     const email = String(formData.get("email"))
