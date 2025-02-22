@@ -14,3 +14,10 @@
 
 # secrets
 .env*
+
+# os
+.DS_Store
+
+# database
+/prisma/dev.db
+/prisma/dev.db-journal
