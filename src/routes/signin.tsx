@@ -1,5 +1,5 @@
 import type {ActionFunctionArgs, MetaFunction} from "@remix-run/node"
-import {Form, useSearchParams} from "@remix-run/react"
+import {Form, Link, useSearchParams} from "@remix-run/react"
 
 import {signIn} from "~/utils/auth.server"
 
@@ -27,7 +27,7 @@ const Route = () => {
         <>
             <h2 className="text-2xl font-bold mb-8">Sign in</h2>
 
-            <Form method="post" className="grid max-w-xs">
+            <Form method="post" className="grid max-w-xs mb-8">
                 <label htmlFor="email">Email</label>
                 <input
                     required
@@ -60,6 +60,10 @@ const Route = () => {
                     Sign in
                 </button>
             </Form>
+
+            <Link to="/forgot" className="text-sm hover:text-purple-500">
+                Forgot password?
+            </Link>
         </>
     )
 }
