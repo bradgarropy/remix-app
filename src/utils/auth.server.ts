@@ -2,7 +2,7 @@ import type {ResetToken, User} from "@prisma/client"
 import {redirect} from "@remix-run/node"
 import bcrypt from "bcryptjs"
 
-import {deleteResetToken, getResetToken} from "~/utils/resetTokens"
+import {deleteResetToken, getResetToken} from "~/utils/resetTokens.server"
 import {
     createSession,
     deleteSession,
@@ -127,14 +127,14 @@ const resetPassword = async ({
     const resetToken = await getResetToken(token)
 
     if (!resetToken) {
-        throw new Error("Invalid password reset token")
+        throw new Error("Invalid reset token")
     }
 
     const isExpired = resetToken.expiresAt < new Date()
 
     if (isExpired) {
         await deleteResetToken(resetToken.id)
-        throw new Error("Password reset token is expired")
+        throw new Error("Reset token is expired")
     }
 
     const userExists = await getUserById(resetToken.userId)
