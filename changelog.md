@@ -36,6 +36,13 @@ _YYYY-MM-DD_
 
 - _TBD_
 
+## [0.0.8][0.0.8]
+
+_2025-02-24_
+
+- Implement forgot password flow
+- Add delete expired reset tokens script
+
 ## [0.0.7][0.0.7]
 
 _2025-02-18_
