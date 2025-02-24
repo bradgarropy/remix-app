@@ -5,7 +5,7 @@ import type {ResetToken} from "@prisma/client"
 import {db} from "~/utils/database.server"
 
 const getResetToken = async (token: ResetToken["token"]) => {
-    const hashedToken = hash("sha256", token).toString()
+    const hashedToken = hash("sha256", token, "hex")
 
     const resetToken = await db.resetToken.findUnique({
         where: {token: hashedToken},
@@ -20,7 +20,7 @@ type CreateResetParams = {
 
 const createResetToken = async ({userId}: CreateResetParams) => {
     const token = randomUUID()
-    const hashedToken = hash("sha256", token).toString()
+    const hashedToken = hash("sha256", token, "hex")
 
     const FIFTEEN_MINUTES_FROM_NOW = new Date(
         Date.now() + 1000 * 60 * 15,
