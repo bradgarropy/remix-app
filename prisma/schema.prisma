@@ -8,9 +8,20 @@ datasource db {
 }
 
 model User {
+    id         Int          @id @default(autoincrement())
+    email      String       @unique
+    password   String
+    ResetToken ResetToken[]
+    createdAt  DateTime     @default(now())
+    updatedAt  DateTime     @updatedAt
+}
+
+model ResetToken {
     id        Int      @id @default(autoincrement())
-    email     String   @unique
-    password  String
+    token     String   @unique
+    expiresAt DateTime
+    userId    Int
+    user      User     @relation(fields: [userId], references: [id])
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }

@@ -1,7 +1,7 @@
 import type {User} from "@prisma/client"
 import {createCookieSessionStorage, redirect} from "@remix-run/node"
 
-import {getUserById} from "~/utils/users.server"
+import {getUserById} from "~/models/users.server"
 
 type UserSession = {
     userId: User["id"]
@@ -41,7 +41,8 @@ const createSession = async ({
     const session = await getSession(request)
     session.set("userId", userId)
 
-    const maxAge = remember ? 60 * 60 * 24 * 7 : undefined
+    const SEVEN_DAYS_IN_SECONDS = 60 * 60 * 24 * 7
+    const maxAge = remember ? SEVEN_DAYS_IN_SECONDS : undefined
     const cookie = await sessionStorage.commitSession(session, {maxAge})
 
     return redirect(redirectUrl, {headers: {"set-cookie": cookie}})

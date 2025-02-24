@@ -1,8 +1,8 @@
-import {expect, test, vi} from "vitest"
+import {expect, test, vitest} from "vitest"
 
 import {createRelease} from "~/utils/sentry"
 
-vi.mock("../../package.json", () => {
+vitest.mock("../../package.json", () => {
     const pkg = {
         name: "test",
         version: "1.2.3",

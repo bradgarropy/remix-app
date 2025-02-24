@@ -1,13 +1,19 @@
-import type {User} from "@prisma/client"
+import type {ResetToken, User} from "@prisma/client"
 import {redirect} from "@remix-run/node"
 import bcrypt from "bcryptjs"
 
+import {deleteResetToken, getResetToken} from "~/models/resetTokens.server"
+import {
+    createUser,
+    getUserByEmail,
+    getUserById,
+    updatePassword,
+} from "~/models/users.server"
 import {
     createSession,
     deleteSession,
     getUserFromSession,
 } from "~/utils/session.server"
-import {createUser, getUserByEmail} from "~/utils/users.server"
 
 type SignUpParams = {
     request: Request
@@ -105,4 +111,55 @@ const requireUser = async (request: Request) => {
     return user
 }
 
-export {requireUser, signIn, signOut, signUp}
+type ResetPasswordParams = {
+    request: Request
+    token: ResetToken["token"]
+    newPassword: User["password"]
+    newPasswordConfirmation: User["password"]
+}
+
+const resetPassword = async ({
+    request,
+    token,
+    newPassword,
+    newPasswordConfirmation,
+}: ResetPasswordParams) => {
+    const resetToken = await getResetToken(token)
+
+    if (!resetToken) {
+        throw new Error("Invalid reset token")
+    }
+
+    const isExpired = resetToken.expiresAt < new Date()
+
+    if (isExpired) {
+        await deleteResetToken(resetToken.id)
+        throw new Error("Reset token is expired")
+    }
+
+    const userExists = await getUserById(resetToken.userId)
+
+    if (!userExists) {
+        throw new Error("User not found")
+    }
+
+    if (newPassword !== newPasswordConfirmation) {
+        throw new Error("Passwords do not match")
+    }
+
+    const user = await updatePassword({
+        id: resetToken.userId,
+        password: newPassword,
+    })
+
+    await deleteResetToken(resetToken.id)
+
+    return signIn({
+        request,
+        email: user.email,
+        password: newPassword,
+        redirectUrl: "/",
+    })
+}
+
+export {requireUser, resetPassword, signIn, signOut, signUp}

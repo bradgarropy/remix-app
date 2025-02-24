@@ -2,7 +2,12 @@ import {describe, expect, test} from "vitest"
 
 import {mockDb} from "~/mocks/db"
 import {mockUser} from "~/mocks/users"
-import {createUser, getUserByEmail, getUserById} from "~/utils/users.server"
+import {
+    createUser,
+    getUserByEmail,
+    getUserById,
+    updatePassword,
+} from "~/models/users.server"
 
 describe("createUser", () => {
     test("creates user", async () => {
@@ -31,6 +36,19 @@ describe("getUserByEmail", () => {
         mockDb.user.findUnique.mockResolvedValueOnce(mockUser)
 
         const user = await getUserByEmail(mockUser.email)
+        expect(user).toEqual(mockUser)
+    })
+})
+
+describe("updatePassword", () => {
+    test("updates password", async () => {
+        mockDb.user.update.mockResolvedValueOnce(mockUser)
+
+        const user = await updatePassword({
+            id: mockUser.id,
+            password: mockUser.password,
+        })
+
         expect(user).toEqual(mockUser)
     })
 })
