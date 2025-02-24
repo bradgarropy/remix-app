@@ -42,4 +42,23 @@ const deleteResetToken = async (id: ResetToken["id"]) => {
     return resetToken
 }
 
-export {createResetToken, deleteResetToken, getResetToken}
+const deleteExpiredResetTokens = async () => {
+    const now = new Date().toISOString()
+
+    const {count} = await db.resetToken.deleteMany({
+        where: {
+            expiresAt: {
+                lt: now,
+            },
+        },
+    })
+
+    return count
+}
+
+export {
+    createResetToken,
+    deleteExpiredResetTokens,
+    deleteResetToken,
+    getResetToken,
+}

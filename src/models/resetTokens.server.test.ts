@@ -6,6 +6,7 @@ import {mockDb} from "~/mocks/db"
 import {mockResetToken} from "~/mocks/resetTokens"
 import {
     createResetToken,
+    deleteExpiredResetTokens,
     deleteResetToken,
     getResetToken,
 } from "~/models/resetTokens.server"
@@ -51,5 +52,14 @@ describe("deleteResetToken", () => {
 
         const resetToken = await deleteResetToken(mockResetToken.id)
         expect(resetToken).toEqual(mockResetToken)
+    })
+})
+
+describe("deleteExpiredResetTokens", () => {
+    test("deletes expired reset tokens", async () => {
+        mockDb.resetToken.deleteMany.mockResolvedValueOnce({count: 5})
+
+        const count = await deleteExpiredResetTokens()
+        expect(count).toEqual(5)
     })
 })
