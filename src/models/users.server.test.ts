@@ -7,7 +7,7 @@ import {
     getUserByEmail,
     getUserById,
     updatePassword,
-} from "~/utils/users.server"
+} from "~/models/users.server"
 
 describe("createUser", () => {
     test("creates user", async () => {

@@ -8,7 +8,7 @@ import {
     getSession,
     getUserFromSession,
 } from "~/utils/session.server"
-import * as users from "~/utils/users.server"
+import * as users from "~/models/users.server"
 
 const getUserByIdSpy = vitest.spyOn(users, "getUserById")
 

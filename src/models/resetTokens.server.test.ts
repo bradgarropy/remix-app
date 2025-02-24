@@ -8,7 +8,7 @@ import {
     createResetToken,
     deleteResetToken,
     getResetToken,
-} from "~/utils/resetTokens.server"
+} from "~/models/resetTokens.server"
 
 vitest.mock("node:crypto", () => {
     return {

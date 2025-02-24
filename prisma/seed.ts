@@ -1,4 +1,4 @@
 import {mockUser} from "~/mocks/users"
-import {createUser} from "~/utils/users.server"
+import {createUser} from "~/models/users.server"
 
 await createUser(mockUser)

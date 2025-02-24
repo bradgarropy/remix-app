@@ -1,8 +1,8 @@
 import type {ActionFunctionArgs, MetaFunction} from "@remix-run/node"
 import {Form, Link, useActionData} from "@remix-run/react"
 
-import {createResetToken} from "~/utils/resetTokens.server"
-import {getUserByEmail} from "~/utils/users.server"
+import {createResetToken} from "~/models/resetTokens.server"
+import {getUserByEmail} from "~/models/users.server"
 
 export const meta: MetaFunction = () => [
     {

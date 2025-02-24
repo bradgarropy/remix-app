@@ -1,7 +1,7 @@
 import type {User} from "@prisma/client"
 import {createCookieSessionStorage, redirect} from "@remix-run/node"
 
-import {getUserById} from "~/utils/users.server"
+import {getUserById} from "~/models/users.server"
 
 type UserSession = {
     userId: User["id"]

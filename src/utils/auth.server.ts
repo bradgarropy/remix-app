@@ -2,7 +2,7 @@ import type {ResetToken, User} from "@prisma/client"
 import {redirect} from "@remix-run/node"
 import bcrypt from "bcryptjs"
 
-import {deleteResetToken, getResetToken} from "~/utils/resetTokens.server"
+import {deleteResetToken, getResetToken} from "~/models/resetTokens.server"
 import {
     createSession,
     deleteSession,
@@ -13,7 +13,7 @@ import {
     getUserByEmail,
     getUserById,
     updatePassword,
-} from "~/utils/users.server"
+} from "~/models/users.server"
 
 type SignUpParams = {
     request: Request

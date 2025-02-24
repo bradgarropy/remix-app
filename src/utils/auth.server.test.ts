@@ -11,9 +11,9 @@ import {
     signOut,
     signUp,
 } from "~/utils/auth.server"
-import * as resetTokens from "~/utils/resetTokens.server"
+import * as resetTokens from "~/models/resetTokens.server"
 import * as session from "~/utils/session.server"
-import * as users from "~/utils/users.server"
+import * as users from "~/models/users.server"
 
 const getUserByIdSpy = vitest.spyOn(users, "getUserById")
 const getUserByEmailSpy = vitest.spyOn(users, "getUserByEmail")
