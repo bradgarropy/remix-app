@@ -4,16 +4,16 @@ import bcrypt from "bcryptjs"
 
 import {deleteResetToken, getResetToken} from "~/models/resetTokens.server"
 import {
-    createSession,
-    deleteSession,
-    getUserFromSession,
-} from "~/utils/session.server"
-import {
     createUser,
     getUserByEmail,
     getUserById,
     updatePassword,
 } from "~/models/users.server"
+import {
+    createSession,
+    deleteSession,
+    getUserFromSession,
+} from "~/utils/session.server"
 
 type SignUpParams = {
     request: Request

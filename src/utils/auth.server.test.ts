@@ -4,6 +4,8 @@ import {describe, expect, test, vitest} from "vitest"
 
 import {mockExpiredResetToken, mockResetToken} from "~/mocks/resetTokens"
 import {mockUser} from "~/mocks/users"
+import * as resetTokens from "~/models/resetTokens.server"
+import * as users from "~/models/users.server"
 import {
     requireUser,
     resetPassword,
@@ -11,9 +13,7 @@ import {
     signOut,
     signUp,
 } from "~/utils/auth.server"
-import * as resetTokens from "~/models/resetTokens.server"
 import * as session from "~/utils/session.server"
-import * as users from "~/models/users.server"
 
 const getUserByIdSpy = vitest.spyOn(users, "getUserById")
 const getUserByEmailSpy = vitest.spyOn(users, "getUserByEmail")

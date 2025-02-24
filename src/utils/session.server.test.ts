@@ -2,13 +2,13 @@ import {createCookie} from "@remix-run/node"
 import {describe, expect, test, vitest} from "vitest"
 
 import {mockUser} from "~/mocks/users"
+import * as users from "~/models/users.server"
 import {
     createSession,
     deleteSession,
     getSession,
     getUserFromSession,
 } from "~/utils/session.server"
-import * as users from "~/models/users.server"
 
 const getUserByIdSpy = vitest.spyOn(users, "getUserById")
 
