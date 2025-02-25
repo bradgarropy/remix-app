@@ -36,18 +36,17 @@ const Route = () => {
                 ⊕ New note
             </Link>
 
-            <ul>
+            <div className="grid gap-y-4 justify-items-start">
                 {notes.map(note => (
-                    <li key={note.id} className=" mb-4">
-                        <Link
-                            to={`/note/${note.id}`}
-                            className="hover:text-purple-500"
-                        >
-                            {note.content}
-                        </Link>
-                    </li>
+                    <Link
+                        to={`/note/${note.id}`}
+                        key={note.id}
+                        className="hover:text-purple-500"
+                    >
+                        {note.content}
+                    </Link>
                 ))}
-            </ul>
+            </div>
         </>
     )
 }
