@@ -5,8 +5,6 @@ import {createUser} from "~/models/users.server"
 
 await createUser(mockUser)
 
-const mockNotesPromises = mockNotes.map(note =>
-    createNote({userId: note.userId, content: note.content}),
-)
-
-await Promise.all(mockNotesPromises)
+for (const mockNote of mockNotes) {
+    await createNote(mockNote)
+}
