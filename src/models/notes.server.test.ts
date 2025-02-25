@@ -3,7 +3,13 @@ import {describe, expect, test} from "vitest"
 import {mockDb} from "~/mocks/db"
 import {mockNote, mockNotes} from "~/mocks/notes"
 import {homer} from "~/mocks/users"
-import {createNote, getNote, getNotes, updateNote} from "~/models/notes.server"
+import {
+    createNote,
+    deleteNote,
+    getNote,
+    getNotes,
+    updateNote,
+} from "~/models/notes.server"
 
 describe("getNotes", () => {
     test("gets notes", async () => {
@@ -40,6 +46,19 @@ describe("updateNote", () => {
             id: mockNote.id,
             userId: homer.id,
             content: "Updated note",
+        })
+
+        expect(note).toEqual(mockNote)
+    })
+})
+
+describe("deleteNote", () => {
+    test("deletes note", async () => {
+        mockDb.note.delete.mockResolvedValueOnce(mockNote)
+
+        const note = await deleteNote({
+            id: mockNote.id,
+            userId: homer.id,
         })
 
         expect(note).toEqual(mockNote)

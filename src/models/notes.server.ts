@@ -50,4 +50,14 @@ const updateNote = async ({id, userId, content}: UpdateNoteParams) => {
     return note
 }
 
-export {createNote, getNote, getNotes, updateNote}
+type DeleteNoteParams = {
+    id: Note["id"]
+    userId: User["id"]
+}
+
+const deleteNote = async ({id, userId}: DeleteNoteParams) => {
+    const note = await db.note.delete({where: {id, userId}})
+    return note
+}
+
+export {createNote, deleteNote, getNote, getNotes, updateNote}
