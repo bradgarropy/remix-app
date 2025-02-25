@@ -38,8 +38,13 @@ const Route = () => {
 
             <ul>
                 {notes.map(note => (
-                    <li key={note.id} className="mb-4">
-                        {note.content}
+                    <li key={note.id} className=" mb-4">
+                        <Link
+                            to={`/note/${note.id}`}
+                            className="hover:text-purple-500"
+                        >
+                            {note.content}
+                        </Link>
                     </li>
                 ))}
             </ul>
