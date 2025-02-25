@@ -36,6 +36,13 @@ _YYYY-MM-DD_
 
 - _TBD_
 
+## [0.0.9][0.0.9]
+
+_2025-02-24_
+
+- Add note create page
+- Add view notes page
+
 ## [0.0.8][0.0.8]
 
 _2025-02-24_
@@ -87,7 +94,8 @@ _2025-02-04_
 
 [keep-a-changelog]: https://keepachangelog.com
 [semver]: https://semver.org
-[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.8...HEAD
+[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.9...HEAD
+[0.0.9]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.9
 [0.0.8]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.8
 [0.0.7]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.7
 [0.0.6]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.6

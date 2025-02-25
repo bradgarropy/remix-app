@@ -14,7 +14,7 @@ export const action = async ({request}: ActionFunctionArgs) => {
 
     const email = String(formData.get("email"))
     const password = String(formData.get("password"))
-    const redirectUrl = String(formData.get("redirectUrl")) || "/"
+    const redirectUrl = String(formData.get("redirectUrl")) || "/notes"
 
     return signIn({request, email, password, redirectUrl})
 }
