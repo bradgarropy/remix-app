@@ -20,9 +20,15 @@ const Navigation = () => {
             </NavLink>
 
             {user ? (
-                <NavLink to="/signout" prefetch="none">
-                    Sign out
-                </NavLink>
+                <>
+                    <NavLink to="/notes" prefetch="intent">
+                        Notes
+                    </NavLink>
+
+                    <NavLink to="/signout" prefetch="none">
+                        Sign out
+                    </NavLink>
+                </>
             ) : (
                 <>
                     <NavLink to="/signup" prefetch="intent">
