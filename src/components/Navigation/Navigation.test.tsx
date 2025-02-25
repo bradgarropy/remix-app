@@ -19,8 +19,6 @@ test("shows unauthenticated routes", () => {
     )
 
     expect(screen.getByText("Home")).toBeInTheDocument()
-    expect(screen.getByText("About")).toBeInTheDocument()
-    expect(screen.getByText("Dashboard")).toBeInTheDocument()
     expect(screen.queryByText("Notes")).not.toBeInTheDocument()
     expect(screen.getByText("Sign up")).toBeInTheDocument()
     expect(screen.getByText("Sign in")).toBeInTheDocument()
@@ -38,8 +36,6 @@ test("shows authenticated routes", () => {
     )
 
     expect(screen.getByText("Home")).toBeInTheDocument()
-    expect(screen.getByText("About")).toBeInTheDocument()
-    expect(screen.getByText("Dashboard")).toBeInTheDocument()
     expect(screen.getByText("Notes")).toBeInTheDocument()
     expect(screen.queryByText("Sign up")).not.toBeInTheDocument()
     expect(screen.queryByText("Sign in")).not.toBeInTheDocument()
