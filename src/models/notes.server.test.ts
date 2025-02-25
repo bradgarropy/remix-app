@@ -2,15 +2,24 @@ import {describe, expect, test} from "vitest"
 
 import {mockDb} from "~/mocks/db"
 import {mockNote, mockNotes} from "~/mocks/notes"
-import {mockUser} from "~/mocks/users"
-import {createNote, getNotes} from "~/models/notes.server"
+import {homer} from "~/mocks/users"
+import {createNote, getNote, getNotes, updateNote} from "~/models/notes.server"
 
 describe("getNotes", () => {
     test("gets notes", async () => {
         mockDb.note.findMany.mockResolvedValueOnce(mockNotes)
 
-        const notes = await getNotes({userId: mockUser.id})
+        const notes = await getNotes({userId: homer.id})
         expect(notes).toEqual(mockNotes)
+    })
+})
+
+describe("getNote", () => {
+    test("gets note", async () => {
+        mockDb.note.findUnique.mockResolvedValueOnce(mockNote)
+
+        const notes = await getNote({id: mockNote.id, userId: homer.id})
+        expect(notes).toEqual(mockNote)
     })
 })
 
@@ -19,6 +28,20 @@ describe("createNote", () => {
         mockDb.note.create.mockResolvedValueOnce(mockNote)
 
         const note = await createNote(mockNote)
+        expect(note).toEqual(mockNote)
+    })
+})
+
+describe("updateNote", () => {
+    test("updates note", async () => {
+        mockDb.note.update.mockResolvedValueOnce(mockNote)
+
+        const note = await updateNote({
+            id: mockNote.id,
+            userId: homer.id,
+            content: "Updated note",
+        })
+
         expect(note).toEqual(mockNote)
     })
 })

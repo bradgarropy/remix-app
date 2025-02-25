@@ -30,19 +30,23 @@ const Route = () => {
             <h2 className="text-2xl font-bold mb-2">Notes</h2>
 
             <Link
-                to="/notes/new"
+                to="/note/new"
                 className="inline-block mb-8 hover:text-purple-500"
             >
                 ⊕ New note
             </Link>
 
-            <ul>
+            <div className="grid gap-y-4 justify-items-start">
                 {notes.map(note => (
-                    <li key={note.id} className="mb-4">
+                    <Link
+                        to={`/note/${note.id}`}
+                        key={note.id}
+                        className="hover:text-purple-500"
+                    >
                         {note.content}
-                    </li>
+                    </Link>
                 ))}
-            </ul>
+            </div>
         </>
     )
 }
