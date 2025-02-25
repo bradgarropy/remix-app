@@ -2,14 +2,14 @@ import {describe, expect, test} from "vitest"
 
 import {mockDb} from "~/mocks/db"
 import {mockNote, mockNotes} from "~/mocks/notes"
-import {mockUser} from "~/mocks/users"
+import {homer} from "~/mocks/users"
 import {createNote, getNotes} from "~/models/notes.server"
 
 describe("getNotes", () => {
     test("gets notes", async () => {
         mockDb.note.findMany.mockResolvedValueOnce(mockNotes)
 
-        const notes = await getNotes({userId: mockUser.id})
+        const notes = await getNotes({userId: homer.id})
         expect(notes).toEqual(mockNotes)
     })
 })

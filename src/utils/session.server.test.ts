@@ -1,7 +1,7 @@
 import {createCookie} from "@remix-run/node"
 import {describe, expect, test, vitest} from "vitest"
 
-import {mockUser} from "~/mocks/users"
+import {homer} from "~/mocks/users"
 import * as users from "~/models/users.server"
 import {
     createSession,
@@ -18,7 +18,7 @@ describe("createSession", () => {
 
         const response = await createSession({
             request,
-            userId: mockUser.id,
+            userId: homer.id,
             redirectUrl: "/",
         })
 
@@ -39,7 +39,7 @@ describe("createSession", () => {
 
         const response = await createSession({
             request,
-            userId: mockUser.id,
+            userId: homer.id,
             remember: true,
             redirectUrl: "/",
         })
@@ -61,31 +61,31 @@ describe("getSession", () => {
     test("gets session", async () => {
         const cookie = await createCookie("__session", {
             secrets: [process.env.SESSION_SECRET!],
-        }).serialize({userId: mockUser.id})
+        }).serialize({userId: homer.id})
 
         const request = new Request("https://example.com", {
             headers: {cookie},
         })
 
         const session = await getSession(request)
-        expect(session.get("userId")).toEqual(mockUser.id)
+        expect(session.get("userId")).toEqual(homer.id)
     })
 })
 
 describe("getUserFromSession", () => {
     test("gets user from session", async () => {
-        getUserByIdSpy.mockResolvedValueOnce(mockUser)
+        getUserByIdSpy.mockResolvedValueOnce(homer)
 
         const cookie = await createCookie("__session", {
             secrets: [process.env.SESSION_SECRET!],
-        }).serialize({userId: mockUser.id})
+        }).serialize({userId: homer.id})
 
         const request = new Request("https://example.com", {
             headers: {cookie},
         })
 
         const user = await getUserFromSession(request)
-        expect(user).toEqual(mockUser)
+        expect(user).toEqual(homer)
     })
 
     test("handles no user", async () => {
@@ -106,7 +106,7 @@ describe("deleteSession", () => {
     test("deletes session", async () => {
         const cookie = await createCookie("__session", {
             secrets: [process.env.SESSION_SECRET!],
-        }).serialize({userId: mockUser.id})
+        }).serialize({userId: homer.id})
 
         const request = new Request("https://example.com", {
             headers: {cookie},

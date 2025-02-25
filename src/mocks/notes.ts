@@ -1,26 +1,26 @@
 import type {Note} from "@prisma/client"
 
-import {mockUser} from "./users"
+import {homer} from "./users"
 
 const mockNotes: Note[] = [
     {
         id: 1,
         content: "First note",
-        userId: mockUser.id,
+        userId: homer.id,
         createdAt: new Date(),
         updatedAt: new Date(),
     },
     {
         id: 2,
         content: "Second note",
-        userId: mockUser.id,
+        userId: homer.id,
         createdAt: new Date(),
         updatedAt: new Date(),
     },
     {
         id: 3,
         content: "Third note",
-        userId: mockUser.id,
+        userId: homer.id,
         createdAt: new Date(),
         updatedAt: new Date(),
     },

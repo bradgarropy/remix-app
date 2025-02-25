@@ -7,7 +7,7 @@ import * as auth from "~/utils/auth"
 const useAuthSpy = vitest.spyOn(auth, "useAuth")
 
 import Navigation from "~/components/Navigation"
-import {mockUser} from "~/mocks/users"
+import {homer} from "~/mocks/users"
 
 test("shows unauthenticated routes", () => {
     useAuthSpy.mockReturnValueOnce(null)
@@ -27,7 +27,7 @@ test("shows unauthenticated routes", () => {
 })
 
 test("shows authenticated routes", () => {
-    useAuthSpy.mockReturnValueOnce(mockUser)
+    useAuthSpy.mockReturnValueOnce(homer)
 
     render(
         <MemoryRouter>

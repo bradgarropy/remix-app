@@ -1,7 +1,7 @@
 import {describe, expect, test} from "vitest"
 
 import {mockDb} from "~/mocks/db"
-import {mockUser} from "~/mocks/users"
+import {homer} from "~/mocks/users"
 import {
     createUser,
     getUserByEmail,
@@ -11,44 +11,44 @@ import {
 
 describe("createUser", () => {
     test("creates user", async () => {
-        mockDb.user.create.mockResolvedValueOnce(mockUser)
+        mockDb.user.create.mockResolvedValueOnce(homer)
 
         const user = await createUser({
-            email: mockUser.email,
-            password: mockUser.password,
+            email: homer.email,
+            password: homer.password,
         })
 
-        expect(user).toEqual(mockUser)
+        expect(user).toEqual(homer)
     })
 })
 
 describe("getUserById", () => {
     test("gets user by id", async () => {
-        mockDb.user.findUnique.mockResolvedValueOnce(mockUser)
+        mockDb.user.findUnique.mockResolvedValueOnce(homer)
 
-        const user = await getUserById(mockUser.id)
-        expect(user).toEqual(mockUser)
+        const user = await getUserById(homer.id)
+        expect(user).toEqual(homer)
     })
 })
 
 describe("getUserByEmail", () => {
     test("gets user by email", async () => {
-        mockDb.user.findUnique.mockResolvedValueOnce(mockUser)
+        mockDb.user.findUnique.mockResolvedValueOnce(homer)
 
-        const user = await getUserByEmail(mockUser.email)
-        expect(user).toEqual(mockUser)
+        const user = await getUserByEmail(homer.email)
+        expect(user).toEqual(homer)
     })
 })
 
 describe("updatePassword", () => {
     test("updates password", async () => {
-        mockDb.user.update.mockResolvedValueOnce(mockUser)
+        mockDb.user.update.mockResolvedValueOnce(homer)
 
         const user = await updatePassword({
-            id: mockUser.id,
-            password: mockUser.password,
+            id: homer.id,
+            password: homer.password,
         })
 
-        expect(user).toEqual(mockUser)
+        expect(user).toEqual(homer)
     })
 })
