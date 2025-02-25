@@ -1,12 +1,8 @@
-import type {
-    ActionFunctionArgs,
-    LoaderFunctionArgs,
-    MetaFunction,
-} from "@remix-run/node"
+import type {LoaderFunctionArgs, MetaFunction} from "@remix-run/node"
 import {Link, useLoaderData} from "@remix-run/react"
 
 import {getNotes} from "~/models/notes.server"
-import {requireUser, resetPassword} from "~/utils/auth.server"
+import {requireUser} from "~/utils/auth.server"
 
 export const meta: MetaFunction = () => [
     {
@@ -14,25 +10,9 @@ export const meta: MetaFunction = () => [
     },
 ]
 
-export const action = async ({request, params}: ActionFunctionArgs) => {
-    if (!params.token) {
-        throw new Error("No password reset token provided")
-    }
-
-    const formData = await request.formData()
-
-    const newPassword = String(formData.get("newPassword"))
-
-    const newPasswordConfirmation = String(
-        formData.get("newPasswordConfirmation"),
-    )
-
-    return resetPassword({
-        request,
-        token: params.token,
-        newPassword,
-        newPasswordConfirmation,
-    })
+export const action = async () => {
+    // TODO: implement delete note
+    return {}
 }
 
 export const loader = async ({request}: LoaderFunctionArgs) => {
