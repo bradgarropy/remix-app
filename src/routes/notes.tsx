@@ -30,7 +30,7 @@ const Route = () => {
             <h2 className="text-2xl font-bold mb-2">Notes</h2>
 
             <Link
-                to="/notes/new"
+                to="/note/new"
                 className="inline-block mb-8 hover:text-purple-500"
             >
                 ⊕ New note
