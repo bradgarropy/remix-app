@@ -8,7 +8,7 @@ type GetNotesParams = {
 
 const getNotes = async ({userId}: GetNotesParams) => {
     const notes = await db.note.findMany({
-        where: {id: userId},
+        where: {userId},
         orderBy: {createdAt: "asc"},
     })
 
