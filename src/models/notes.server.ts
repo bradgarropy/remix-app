@@ -15,6 +15,16 @@ const getNotes = async ({userId}: GetNotesParams) => {
     return notes
 }
 
+type GetNoteParams = {
+    id: Note["id"]
+    userId: User["id"]
+}
+
+const getNote = async ({id, userId}: GetNoteParams) => {
+    const notes = await db.note.findUnique({where: {id, userId}})
+    return notes
+}
+
 type CreateNoteParams = {
     userId: User["id"]
     content: Note["content"]
@@ -25,4 +35,19 @@ const createNote = async ({userId, content}: CreateNoteParams) => {
     return note
 }
 
-export {createNote, getNotes}
+type UpdateNoteParams = {
+    id: Note["id"]
+    userId: User["id"]
+    content: Note["content"]
+}
+
+const updateNote = async ({id, userId, content}: UpdateNoteParams) => {
+    const note = await db.note.update({
+        where: {id, userId},
+        data: {content},
+    })
+
+    return note
+}
+
+export {createNote, getNote, getNotes, updateNote}
