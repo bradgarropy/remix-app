@@ -81,8 +81,9 @@ jobs:
                   node-version: 22
             - name: "📦 install"
               run: npm ci
+            - name: "🌐 browsers"
+              run: npx playwright install --with-deps
+            - name: "🛠️ build"
+              run: npm ci
             - name: "🎭 e2e"
-              run: |
-                  npx playwright install --with-deps
-                  npm run build
-                  npm run test:e2e
+              run: npm run test:e2e
