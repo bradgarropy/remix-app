@@ -38,7 +38,7 @@ jobs:
             - name: "💾 format"
               run: npm run format
     typecheck:
-        name: "🟦 types"
+        name: "🟦 typecheck"
         runs-on: ubuntu-latest
         steps:
             - name: "📚 checkout"
@@ -50,7 +50,7 @@ jobs:
                   cache: "npm"
             - name: "📦 install"
               run: npm ci
-            - name: "🟦 types"
+            - name: "🟦 typecheck"
               run: npm run typecheck
     test:
         name: "🧪 test"
