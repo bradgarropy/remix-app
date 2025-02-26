@@ -1,0 +1,23 @@
+name: "🧶 lint"
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+
+jobs:
+    lint:
+        name: "🧶 lint"
+        runs-on: ubuntu-latest
+        steps:
+            - name: "📚 checkout"
+              uses: actions/checkout@v4
+            - name: "🟢 node"
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+            - name: "📦 install"
+              run: npm install --force
+            - name: "🧶 lint"
+              run: npm run lint
