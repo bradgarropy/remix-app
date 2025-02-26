@@ -8,7 +8,6 @@ on:
 
 jobs:
     format:
-        name: "💾 format"
         runs-on: ubuntu-latest
         steps:
             - name: "📚 checkout"
