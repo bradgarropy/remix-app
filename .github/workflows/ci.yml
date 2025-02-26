@@ -17,8 +17,9 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: 22
+                  cache: "npm"
             - name: "📦 install"
-              run: npm install --force
+              run: npm ci
             - name: "🧶 lint"
               run: npm run lint
     format:
@@ -31,8 +32,9 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: 22
+                  cache: "npm"
             - name: "📦 install"
-              run: npm install --force
+              run: npm ci
             - name: "💾 format"
               run: npm run format
     typecheck:
@@ -45,6 +47,7 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: 22
+                  cache: "npm"
             - name: "📦 install"
               run: npm ci
             - name: "🟦 types"
@@ -59,6 +62,7 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: 22
+                  cache: "npm"
             - name: "📦 install"
               run: npm ci
             - name: "🧪 test"
@@ -79,6 +83,7 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: 22
+                  cache: "npm"
             - name: "📦 install"
               run: npm ci
             - name: "🌐 browsers"
