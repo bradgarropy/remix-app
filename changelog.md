@@ -36,6 +36,12 @@ _YYYY-MM-DD_
 
 - _TBD_
 
+## [0.0.13][0.0.13]
+
+_2025-02-27_
+
+- Show authenticated user email
+
 ## [0.0.12][0.0.12]
 
 _2025-02-26_
@@ -112,7 +118,8 @@ _2025-02-04_
 
 [keep-a-changelog]: https://keepachangelog.com
 [semver]: https://semver.org
-[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.12...HEAD
+[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.13...HEAD
+[0.0.13]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.13
 [0.0.12]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.12
 [0.0.11]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.11
 [0.0.10]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.10
