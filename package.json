@@ -1,6 +1,6 @@
 {
     "name": "remix-app",
-    "version": "0.0.13",
+    "version": "0.0.14",
     "description": "💿 remix app",
     "type": "module",
     "keywords": [
@@ -59,6 +59,7 @@
         "@sentry/remix": "^8.33.1",
         "bcryptjs": "^2.4.3",
         "isbot": "^5.1.1",
+        "nodemailer": "^6.10.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0"
     },
@@ -77,6 +78,7 @@
         "@testing-library/user-event": "^14.4.3",
         "@types/bcryptjs": "^2.4.6",
         "@types/node": "^22.7.5",
+        "@types/nodemailer": "^6.4.17",
         "@types/react": "^19.0.1",
         "@types/react-dom": "^19.0.2",
         "@vitejs/plugin-react": "^4.0.1",
