@@ -36,6 +36,13 @@ _YYYY-MM-DD_
 
 - _TBD_
 
+## [0.0.14][0.0.14]
+
+_2025-02-27_
+
+- Integrate [`nodemailer`][nodemailer]
+- Send password reset link via email
+
 ## [0.0.13][0.0.13]
 
 _2025-02-27_
@@ -118,7 +125,8 @@ _2025-02-04_
 
 [keep-a-changelog]: https://keepachangelog.com
 [semver]: https://semver.org
-[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.13...HEAD
+[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.14...HEAD
+[0.0.14]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.14
 [0.0.13]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.13
 [0.0.12]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.12
 [0.0.11]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.11
@@ -135,3 +143,4 @@ _2025-02-04_
 [remix-starter]: https://github.com/bradgarropy/remix-starter
 [prisma]: https://prisma.io
 [github-actions]: https://github.com/features/actions
+[nodemailer]: https://www.nodemailer.com
