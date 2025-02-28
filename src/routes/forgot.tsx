@@ -3,6 +3,7 @@ import {Form, Link, useActionData} from "@remix-run/react"
 
 import {createResetToken} from "~/models/resetTokens.server"
 import {getUserByEmail} from "~/models/users.server"
+import {sendEmail} from "~/utils/email.server"
 
 export const meta: MetaFunction = () => [
     {
@@ -21,6 +22,18 @@ export const action = async ({request}: ActionFunctionArgs) => {
     }
 
     const token = await createResetToken({userId: user.id})
+
+    const {origin} = new URL(request.url)
+    const url = `${origin}/reset/${token}`
+
+    await sendEmail({
+        to: user.email,
+        from: "Remix App <remix-app@gmail.com>",
+        subject: "Reset your password",
+        text: `Click this link to reset your password: ${url}`,
+        html: `<p>Click <a href="${url}">this link</a> to reset your password.</p>`,
+    })
+
     return {token}
 }
 
