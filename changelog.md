@@ -36,6 +36,12 @@ _YYYY-MM-DD_
 
 - _TBD_
 
+## [0.0.15][0.0.15]
+
+_2025-02-27_
+
+- Automate terminals with [vscode tasks][vscode-tasks]
+
 ## [0.0.14][0.0.14]
 
 _2025-02-27_
@@ -125,7 +131,8 @@ _2025-02-04_
 
 [keep-a-changelog]: https://keepachangelog.com
 [semver]: https://semver.org
-[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.14...HEAD
+[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.15...HEAD
+[0.0.15]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.15
 [0.0.14]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.14
 [0.0.13]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.13
 [0.0.12]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.12
@@ -144,3 +151,4 @@ _2025-02-04_
 [prisma]: https://prisma.io
 [github-actions]: https://github.com/features/actions
 [nodemailer]: https://www.nodemailer.com
+[vscode-tasks]: https://code.visualstudio.com/docs/terminal/basics#_automating-terminals-with-tasks
