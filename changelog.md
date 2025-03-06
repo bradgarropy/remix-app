@@ -36,6 +36,57 @@ _YYYY-MM-DD_
 
 - _TBD_
 
+## [0.0.15][0.0.15]
+
+_2025-02-27_
+
+- Automate terminals with [vscode tasks][vscode-tasks]
+
+## [0.0.14][0.0.14]
+
+_2025-02-27_
+
+- Integrate [`nodemailer`][nodemailer]
+- Send password reset link via email
+
+## [0.0.13][0.0.13]
+
+_2025-02-27_
+
+- Show authenticated user email
+
+## [0.0.12][0.0.12]
+
+_2025-02-26_
+
+- Combine [GitHub Actions][github-actions] into a single `ci` workflow
+
+## [0.0.11][0.0.11]
+
+_2025-02-25_
+
+- Add delete note feature
+
+## [0.0.10][0.0.10]
+
+_2025-02-25_
+
+- Add update note feature
+
+## [0.0.9][0.0.9]
+
+_2025-02-24_
+
+- Add note create page
+- Add view notes page
+
+## [0.0.8][0.0.8]
+
+_2025-02-24_
+
+- Implement forgot password flow
+- Add delete expired reset tokens script
+
 ## [0.0.7][0.0.7]
 
 _2025-02-18_
@@ -80,7 +131,15 @@ _2025-02-04_
 
 [keep-a-changelog]: https://keepachangelog.com
 [semver]: https://semver.org
-[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.7...HEAD
+[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.15...HEAD
+[0.0.15]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.15
+[0.0.14]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.14
+[0.0.13]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.13
+[0.0.12]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.12
+[0.0.11]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.11
+[0.0.10]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.10
+[0.0.9]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.9
+[0.0.8]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.8
 [0.0.7]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.7
 [0.0.6]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.6
 [0.0.5]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.5
@@ -90,3 +149,6 @@ _2025-02-04_
 [0.0.1]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.1
 [remix-starter]: https://github.com/bradgarropy/remix-starter
 [prisma]: https://prisma.io
+[github-actions]: https://github.com/features/actions
+[nodemailer]: https://www.nodemailer.com
+[vscode-tasks]: https://code.visualstudio.com/docs/terminal/basics#_automating-terminals-with-tasks

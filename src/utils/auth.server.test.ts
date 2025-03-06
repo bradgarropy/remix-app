@@ -2,28 +2,40 @@ import {redirect} from "@remix-run/node"
 import bcrypt from "bcryptjs"
 import {describe, expect, test, vitest} from "vitest"
 
-import {mockUser} from "~/mocks/users"
-import {requireUser, signIn, signOut, signUp} from "~/utils/auth.server"
+import {mockExpiredResetToken, mockResetToken} from "~/mocks/resetTokens"
+import {homer} from "~/mocks/users"
+import * as resetTokens from "~/models/resetTokens.server"
+import * as users from "~/models/users.server"
+import {
+    requireUser,
+    resetPassword,
+    signIn,
+    signOut,
+    signUp,
+} from "~/utils/auth.server"
 import * as session from "~/utils/session.server"
-import * as users from "~/utils/users.server"
 
+const getUserByIdSpy = vitest.spyOn(users, "getUserById")
 const getUserByEmailSpy = vitest.spyOn(users, "getUserByEmail")
 const createUserSpy = vitest.spyOn(users, "createUser")
+const updatePasswordSpy = vitest.spyOn(users, "updatePassword")
 const createSessionSpy = vitest.spyOn(session, "createSession")
 const deleteSessionSpy = vitest.spyOn(session, "deleteSession")
 const getUserFromSessionSpy = vitest.spyOn(session, "getUserFromSession")
 const compareSpy = vitest.spyOn(bcrypt, "compare")
+const getResetTokenSpy = vitest.spyOn(resetTokens, "getResetToken")
+const deleteResetTokenSpy = vitest.spyOn(resetTokens, "deleteResetToken")
 
 describe("signUp", () => {
     test("user signs up", async () => {
         getUserByEmailSpy.mockResolvedValueOnce(null)
-        createUserSpy.mockResolvedValueOnce(mockUser)
+        createUserSpy.mockResolvedValueOnce(homer)
 
         const request = new Request("http://example.com")
 
         await signUp({
             request,
-            email: mockUser.email,
+            email: homer.email,
             password: "password",
             passwordConfirmation: "password",
         })
@@ -32,20 +44,20 @@ describe("signUp", () => {
 
         expect(createSessionSpy).toHaveBeenLastCalledWith({
             request,
-            userId: mockUser.id,
+            userId: homer.id,
             remember: false,
             redirectUrl: "/",
         })
     })
 
     test("user already exists", async () => {
-        getUserByEmailSpy.mockResolvedValueOnce(mockUser)
+        getUserByEmailSpy.mockResolvedValueOnce(homer)
 
         const request = new Request("http://example.com")
 
         const signUpPromise = signUp({
             request,
-            email: mockUser.email,
+            email: homer.email,
             password: "password",
             passwordConfirmation: "password",
         })
@@ -62,7 +74,7 @@ describe("signUp", () => {
 
         const signUpPromise = signUp({
             request,
-            email: mockUser.email,
+            email: homer.email,
             password: "password",
             passwordConfirmation: "different-password",
         })
@@ -75,7 +87,7 @@ describe("signUp", () => {
 
 describe("signIn", () => {
     test("user signs in", async () => {
-        getUserByEmailSpy.mockResolvedValueOnce(mockUser)
+        getUserByEmailSpy.mockResolvedValueOnce(homer)
 
         // @ts-expect-error bcrypt compare type
         compareSpy.mockResolvedValueOnce(true)
@@ -84,7 +96,7 @@ describe("signIn", () => {
 
         await signIn({
             request,
-            email: mockUser.email,
+            email: homer.email,
             password: "password",
             redirectUrl: "/",
         })
@@ -93,7 +105,7 @@ describe("signIn", () => {
 
         expect(createSessionSpy).toHaveBeenLastCalledWith({
             request,
-            userId: mockUser.id,
+            userId: homer.id,
             remember: true,
             redirectUrl: "/",
         })
@@ -106,7 +118,7 @@ describe("signIn", () => {
 
         const signInPromise = signIn({
             request,
-            email: mockUser.email,
+            email: homer.email,
             password: "password",
             redirectUrl: "/",
         })
@@ -115,7 +127,7 @@ describe("signIn", () => {
     })
 
     test("invalid password", async () => {
-        getUserByEmailSpy.mockResolvedValueOnce(mockUser)
+        getUserByEmailSpy.mockResolvedValueOnce(homer)
 
         // @ts-expect-error bcrypt compare type
         compareSpy.mockResolvedValueOnce(false)
@@ -124,7 +136,7 @@ describe("signIn", () => {
 
         const signInPromise = signIn({
             request,
-            email: mockUser.email,
+            email: homer.email,
             password: "password",
             redirectUrl: "/",
         })
@@ -135,7 +147,7 @@ describe("signIn", () => {
 
 describe("signOut", () => {
     test("user signs out", async () => {
-        getUserFromSessionSpy.mockResolvedValueOnce(mockUser)
+        getUserFromSessionSpy.mockResolvedValueOnce(homer)
 
         const request = new Request("http://example.com")
 
@@ -159,12 +171,12 @@ describe("signOut", () => {
 
 describe("requireUser", () => {
     test("requires user", async () => {
-        getUserFromSessionSpy.mockResolvedValueOnce(mockUser)
+        getUserFromSessionSpy.mockResolvedValueOnce(homer)
 
         const request = new Request("http://example.com")
 
         const user = await requireUser(request)
-        expect(user).toEqual(mockUser)
+        expect(user).toEqual(homer)
     })
 
     test("handles no user", async () => {
@@ -174,6 +186,112 @@ describe("requireUser", () => {
 
         await expect(() => requireUser(request)).rejects.toEqual(
             redirect("/signin?redirectUrl=/"),
+        )
+    })
+})
+
+describe("resetPassword", () => {
+    test("resets password", async () => {
+        getResetTokenSpy.mockResolvedValueOnce(mockResetToken)
+        getUserByIdSpy.mockResolvedValueOnce(homer)
+        updatePasswordSpy.mockResolvedValueOnce(homer)
+        getUserByEmailSpy.mockResolvedValueOnce(homer)
+
+        // @ts-expect-error bcrypt compare type
+        compareSpy.mockResolvedValueOnce(true)
+
+        const request = new Request("http://example.com")
+
+        await resetPassword({
+            request,
+            token: mockResetToken.token,
+            newPassword: "new-password",
+            newPasswordConfirmation: "new-password",
+        })
+
+        expect(updatePasswordSpy).toHaveBeenCalledTimes(1)
+        expect(updatePasswordSpy).toHaveBeenLastCalledWith({
+            id: mockResetToken.userId,
+            password: "new-password",
+        })
+
+        expect(deleteResetTokenSpy).toHaveBeenCalledTimes(1)
+        expect(deleteResetTokenSpy).toHaveBeenLastCalledWith(mockResetToken.id)
+    })
+
+    test("invalid reset token", async () => {
+        getResetTokenSpy.mockResolvedValueOnce(null)
+
+        const request = new Request("http://example.com")
+
+        const resetPasswordPromise = resetPassword({
+            request,
+            token: "invalid-reset-token",
+            newPassword: "new-password",
+            newPasswordConfirmation: "new-password",
+        })
+
+        await expect(resetPasswordPromise).rejects.toThrowError(
+            "Invalid reset token",
+        )
+    })
+
+    test("reset token is expired", async () => {
+        getResetTokenSpy.mockResolvedValueOnce(mockExpiredResetToken)
+
+        const request = new Request("http://example.com")
+
+        const resetPasswordPromise = resetPassword({
+            request,
+            token: mockExpiredResetToken.token,
+            newPassword: "new-password",
+            newPasswordConfirmation: "new-password",
+        })
+
+        await expect(resetPasswordPromise).rejects.toThrowError(
+            "Reset token is expired",
+        )
+
+        expect(deleteResetTokenSpy).toHaveBeenCalledTimes(1)
+
+        expect(deleteResetTokenSpy).toHaveBeenLastCalledWith(
+            mockExpiredResetToken.id,
+        )
+    })
+
+    test("user not found", async () => {
+        getResetTokenSpy.mockResolvedValueOnce(mockResetToken)
+        getUserByIdSpy.mockResolvedValueOnce(null)
+
+        const request = new Request("http://example.com")
+
+        const resetPasswordPromise = resetPassword({
+            request,
+            token: mockResetToken.token,
+            newPassword: "new-password",
+            newPasswordConfirmation: "new-password",
+        })
+
+        await expect(resetPasswordPromise).rejects.toThrowError(
+            "User not found",
+        )
+    })
+
+    test("passwords do not match", async () => {
+        getResetTokenSpy.mockResolvedValueOnce(mockResetToken)
+        getUserByIdSpy.mockResolvedValueOnce(homer)
+
+        const request = new Request("http://example.com")
+
+        const resetPasswordPromise = resetPassword({
+            request,
+            token: mockResetToken.token,
+            newPassword: "new-password",
+            newPasswordConfirmation: "new-password-confirmation",
+        })
+
+        await expect(resetPasswordPromise).rejects.toThrowError(
+            "Passwords do not match",
         )
     })
 })

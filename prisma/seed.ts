@@ -1,4 +1,12 @@
-import {mockUser} from "~/mocks/users"
-import {createUser} from "~/utils/users.server"
+import {mockNotes} from "~/mocks/notes"
+import {mockUsers} from "~/mocks/users"
+import {createNote} from "~/models/notes.server"
+import {createUser} from "~/models/users.server"
 
-await createUser(mockUser)
+for (const mockUser of mockUsers) {
+    await createUser(mockUser)
+}
+
+for (const mockNote of mockNotes) {
+    await createNote(mockNote)
+}

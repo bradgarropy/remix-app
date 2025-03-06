@@ -11,18 +11,16 @@ const Navigation = () => {
                 Home
             </NavLink>
 
-            <NavLink to="/about" prefetch="intent">
-                About
-            </NavLink>
-
-            <NavLink to="/dashboard" prefetch="intent">
-                Dashboard
-            </NavLink>
-
             {user ? (
-                <NavLink to="/signout" prefetch="none">
-                    Sign out
-                </NavLink>
+                <>
+                    <NavLink to="/notes" prefetch="intent">
+                        Notes
+                    </NavLink>
+
+                    <NavLink to="/signout" prefetch="none">
+                        Sign out
+                    </NavLink>
+                </>
             ) : (
                 <>
                     <NavLink to="/signup" prefetch="intent">

@@ -1,7 +1,6 @@
 import {expect, test} from "@playwright/test"
 
 test("sign up", async ({page}) => {
-    console.log("SIGN UP TEST")
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign up"}).click()
 
@@ -20,8 +19,7 @@ test("sign up", async ({page}) => {
     await expect(page.getByText("Home")).toBeVisible()
 })
 
-test.only("sign in", async ({page}) => {
-    console.log("SIGN IN TEST")
+test("sign in", async ({page}) => {
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign in"}).click()
 
@@ -34,7 +32,6 @@ test.only("sign in", async ({page}) => {
 })
 
 test("sign out", async ({page}) => {
-    console.log("SIGN OUT TEST")
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Sign in"}).click()
 
@@ -46,11 +43,10 @@ test("sign out", async ({page}) => {
 
     await page.getByRole("link", {name: "Sign out"}).click()
 
-    // await expect(page.getByRole("heading", {name: "Home"})).toBeVisible()
+    await expect(page.getByRole("heading", {name: "Home"})).toBeVisible()
 })
 
 test("authenticated content", async ({page}) => {
-    console.log("AUTHENTICATED CONTENT TEST")
     await page.goto("http://localhost:3000")
     await page.getByRole("link", {name: "Dashboard"}).click()
 

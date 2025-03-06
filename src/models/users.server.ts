@@ -26,4 +26,21 @@ const createUser = async ({email, password}: CreateUserParams) => {
     return user
 }
 
-export {createUser, getUserByEmail, getUserById}
+type UpdatePasswordParams = {
+    id: User["id"]
+    password: User["password"]
+}
+
+const updatePassword = async ({id, password}: UpdatePasswordParams) => {
+    const salt = await bcrypt.genSalt()
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+    const user = await db.user.update({
+        where: {id},
+        data: {password: hashedPassword},
+    })
+
+    return user
+}
+
+export {createUser, getUserByEmail, getUserById, updatePassword}
