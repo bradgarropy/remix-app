@@ -30,9 +30,7 @@ export const links: LinksFunction = () => {
 }
 
 export const loader = async ({request}: LoaderFunctionArgs) => {
-    console.log("ROOT LOADER")
     const user = await getUserFromSession(request)
-    console.log({user})
     return {user}
 }
 

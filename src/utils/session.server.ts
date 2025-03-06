@@ -12,16 +12,14 @@ const sessionStorage = createCookieSessionStorage<UserSession>({
         name: "__session",
         httpOnly: true,
         path: "/",
-        sameSite: false,
+        sameSite: "lax",
         secrets: [process.env.SESSION_SECRET!],
-        secure: false,
+        secure: process.env.NODE_ENV === "production",
     },
 })
 
 const getSession = async (request: Request) => {
-    console.log("getSession")
     const cookie = request.headers.get("Cookie")
-    console.log({cookie})
     const session = await sessionStorage.getSession(cookie)
 
     return session
@@ -40,15 +38,11 @@ const createSession = async ({
     remember = false,
     redirectUrl,
 }: CreateSessionParams) => {
-    console.log("createSession")
     const session = await getSession(request)
     session.set("userId", userId)
-    console.log(`set userId: ${userId}`)
 
     const maxAge = remember ? 60 * 60 * 24 * 7 : undefined
     const cookie = await sessionStorage.commitSession(session, {maxAge})
-
-    console.log({cookie})
 
     return redirect(redirectUrl, {headers: {"set-cookie": cookie}})
 }
@@ -61,18 +55,14 @@ const deleteSession = async (request: Request) => {
 }
 
 const getUserFromSession = async (request: Request) => {
-    console.log("getUserFromSession")
     const session = await getSession(request)
     const userId = session.get("userId")
-    console.log({userId})
 
     if (!userId) {
-        console.log("no userId")
         return null
     }
 
     const user = await getUserById(userId)
-    console.log({user})
     return user
 }
 

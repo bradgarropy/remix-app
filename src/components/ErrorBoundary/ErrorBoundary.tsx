@@ -24,9 +24,6 @@ const ErrorBoundary = () => {
                     {`Error: ${error.message}`}
                 </h1>
 
-                <pre className="overflow-auto">
-                    {JSON.stringify(error, null, 2)}
-                </pre>
                 <pre className="overflow-auto">{createErrorStack(error)}</pre>
             </div>
         )
