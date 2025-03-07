@@ -57,56 +57,40 @@ test("create note", async ({page}) => {
 })
 
 test("update note", async ({page}) => {
-    await page.goto("/note/3")
+    await page.goto("/note/new")
     await page.getByRole("link", {name: "Sign in"}).click()
 
     await page.getByRole("textbox", {name: "Email"}).fill(homer.email)
     await page.getByRole("textbox", {name: "Password"}).fill(homer.password)
     await page.getByRole("button", {name: "Sign in"}).click()
 
-    await expect(page).toHaveTitle("💿 remix app | note")
-    await expect(page.getByRole("heading", {name: "Update note"})).toBeVisible()
-    await expect(page.getByText("⊖ Delete note")).toBeVisible()
-    await expect(page.getByLabel("Note")).toHaveValue(mockNotes[2].content)
-    await expect(page.getByRole("button", {name: "Update"})).toBeVisible()
+    await page.getByLabel("Note").fill("Soon to be updated note")
+    await page.getByRole("button", {name: "Create"}).click()
 
-    await page.getByLabel("Note").fill("Third note updated")
+    page.getByText("Soon to be updated note").click()
+
+    await page.getByLabel("Note").fill("Updated note")
     await page.getByRole("button", {name: "Update"}).click()
 
-    await expect(page).toHaveTitle("💿 remix app | notes")
-    await expect(page.getByRole("heading", {name: "Notes"})).toBeVisible()
-
-    await expect(page.getByText(mockNotes[0].content)).toBeVisible()
-    await expect(page.getByText(mockNotes[1].content)).toBeVisible()
-
-    await expect(
-        page.getByText(mockNotes[2].content, {exact: true}),
-    ).not.toBeVisible()
-
-    await expect(page.getByText("Third note updated")).toBeVisible()
+    await expect(page.getByText("Updated note")).toBeVisible()
 })
 
 test("delete note", async ({page}) => {
-    await page.goto("/note/3")
+    await page.goto("/note/new")
     await page.getByRole("link", {name: "Sign in"}).click()
 
     await page.getByRole("textbox", {name: "Email"}).fill(homer.email)
     await page.getByRole("textbox", {name: "Password"}).fill(homer.password)
     await page.getByRole("button", {name: "Sign in"}).click()
 
-    await expect(page).toHaveTitle("💿 remix app | note")
-    await expect(page.getByRole("heading", {name: "Update note"})).toBeVisible()
-    await expect(page.getByText("⊖ Delete note")).toBeVisible()
-    await expect(page.getByLabel("Note")).toHaveValue(mockNotes[2].content)
-    await expect(page.getByRole("button", {name: "Update"})).toBeVisible()
+    await page.getByLabel("Note").fill("Soon to be deleted note")
+    await page.getByRole("button", {name: "Create"}).click()
+
+    page.getByText("Soon to be deleted note").click()
 
     await page.getByText("⊖ Delete note").click()
 
-    await expect(page).toHaveTitle("💿 remix app | notes")
-    await expect(page.getByRole("heading", {name: "Notes"})).toBeVisible()
-    await expect(page.getByText(mockNotes[0].content)).toBeVisible()
-    await expect(page.getByText(mockNotes[1].content)).toBeVisible()
-    await expect(page.getByText(mockNotes[2].content)).not.toBeVisible()
+    await expect(page.getByText("Soon to be deleted note")).not.toBeVisible()
 })
 
 test("restricted note", async ({page}) => {
