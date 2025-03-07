@@ -13,16 +13,13 @@ const config = defineConfig({
     },
     projects: [
         {
+            name: "setup",
+            testMatch: "setup.ts",
+        },
+        {
             name: "chromium",
             use: {...devices["Desktop Chrome"]},
-        },
-        {
-            name: "firefox",
-            use: {...devices["Desktop Firefox"]},
-        },
-        {
-            name: "webkit",
-            use: {...devices["Desktop Safari"]},
+            dependencies: ["setup"],
         },
     ],
     webServer: {
