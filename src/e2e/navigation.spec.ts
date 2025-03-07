@@ -1,5 +1,7 @@
 import {expect, test} from "@playwright/test"
 
+import {homer} from "~/mocks/users"
+
 test("unauthenticated", async ({page}) => {
     await page.goto("/")
 
@@ -26,8 +28,8 @@ test("authenticated", async ({page}) => {
     await page.goto("/")
     await page.getByRole("link", {name: "Sign in"}).click()
 
-    await page.getByRole("textbox", {name: "Email"}).fill("homer@gmail.com")
-    await page.getByRole("textbox", {name: "Password"}).fill("password")
+    await page.getByRole("textbox", {name: "Email"}).fill(homer.email)
+    await page.getByRole("textbox", {name: "Password"}).fill(homer.password)
     await page.getByRole("button", {name: "Sign in"}).click()
 
     await expect(page).toHaveTitle("💿 remix app | home")
