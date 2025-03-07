@@ -38,6 +38,7 @@
         "db:view": "prisma studio",
         "db:seed": "tsx prisma/seed.ts",
         "db:reset": "prisma migrate reset",
+        "db:reset:force": "prisma migrate reset --force",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "format": "prettier --check .",
