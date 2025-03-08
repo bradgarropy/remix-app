@@ -92,6 +92,8 @@ jobs:
               run: npm run build
             - name: "🎭 e2e"
               run: npm run test:e2e
+              env:
+                  SESSION_SECRET: ${{ secrets.SESSION_SECRET}}
             - name: "📤 artifact"
               uses: actions/upload-artifact@v4
               if: ${{ !cancelled() }}
