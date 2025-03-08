@@ -4,6 +4,7 @@ const config = defineConfig({
     testDir: "./src/e2e",
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
+    maxFailures: 1,
     retries: 0,
     // workers: process.env.CI ? 1 : undefined,
     workers: 1,
@@ -24,7 +25,7 @@ const config = defineConfig({
         },
     ],
     webServer: {
-        command: "npm start",
+        command: "npm run dev",
         url: "http://localhost:3000",
         reuseExistingServer: !process.env.CI,
     },

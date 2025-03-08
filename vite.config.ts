@@ -26,11 +26,11 @@ const config = defineConfig(({mode}) => {
         plugins: [
             tsconfigPaths(),
             tailwind(),
-            remixDevTools({
-                client: {
-                    showBreakpointIndicator: false,
-                },
-            }),
+            // remixDevTools({
+            //     client: {
+            //         showBreakpointIndicator: false,
+            //     },
+            // }),
             process.env.VITEST
                 ? react()
                 : remix({
