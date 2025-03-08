@@ -5,7 +5,8 @@ const config = defineConfig({
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
     retries: 0,
-    workers: process.env.CI ? 1 : undefined,
+    // workers: process.env.CI ? 1 : undefined,
+    workers: 1,
     reporter: "html",
     use: {
         baseURL: "http://localhost:3000",

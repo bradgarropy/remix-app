@@ -63,15 +63,19 @@ const signIn = async ({
     password,
     redirectUrl,
 }: SignInParams) => {
+    console.log("signIn")
     const user = await getUserByEmail(email)
+    console.log(user)
 
     if (!user) {
+        console.log("User not found")
         throw new Error("User not found")
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password)
 
     if (!isPasswordMatch) {
+        console.log("Invalid password")
         throw new Error("Invalid password")
     }
 
