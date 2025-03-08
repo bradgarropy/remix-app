@@ -5,7 +5,6 @@ import {homer, marge} from "~/mocks/users"
 
 test("view note", async ({page}) => {
     await page.goto("/notes")
-    await page.getByRole("link", {name: "Sign in"}).click()
 
     await page.getByRole("textbox", {name: "Email"}).fill(homer.email)
     await page.getByRole("textbox", {name: "Password"}).fill(homer.password)
@@ -30,7 +29,6 @@ test("view note", async ({page}) => {
 
 test("create note", async ({page}) => {
     await page.goto("/notes")
-    await page.getByRole("link", {name: "Sign in"}).click()
 
     await page.getByRole("textbox", {name: "Email"}).fill(homer.email)
     await page.getByRole("textbox", {name: "Password"}).fill(homer.password)
@@ -58,7 +56,6 @@ test("create note", async ({page}) => {
 
 test("update note", async ({page}) => {
     await page.goto("/note/new")
-    await page.getByRole("link", {name: "Sign in"}).click()
 
     await page.getByRole("textbox", {name: "Email"}).fill(homer.email)
     await page.getByRole("textbox", {name: "Password"}).fill(homer.password)
@@ -77,7 +74,6 @@ test("update note", async ({page}) => {
 
 test("delete note", async ({page}) => {
     await page.goto("/note/new")
-    await page.getByRole("link", {name: "Sign in"}).click()
 
     await page.getByRole("textbox", {name: "Email"}).fill(homer.email)
     await page.getByRole("textbox", {name: "Password"}).fill(homer.password)
@@ -95,7 +91,6 @@ test("delete note", async ({page}) => {
 
 test("restricted note", async ({page}) => {
     await page.goto("/notes")
-    await page.getByRole("link", {name: "Sign in"}).click()
 
     await page.getByRole("textbox", {name: "Email"}).fill(marge.email)
     await page.getByRole("textbox", {name: "Password"}).fill(marge.password)
