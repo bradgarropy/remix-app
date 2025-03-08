@@ -6,8 +6,6 @@ const config = defineConfig({
     forbidOnly: !!process.env.CI,
     maxFailures: 1,
     retries: 0,
-    // workers: process.env.CI ? 1 : undefined,
-    workers: 1,
     reporter: "html",
     use: {
         baseURL: "http://localhost:3000",
@@ -25,7 +23,7 @@ const config = defineConfig({
         },
     ],
     webServer: {
-        command: "npm run dev",
+        command: "npm start",
         url: "http://localhost:3000",
         reuseExistingServer: !process.env.CI,
     },

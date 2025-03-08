@@ -3,7 +3,7 @@ import {installGlobals} from "@remix-run/node"
 import {sentryVitePlugin as sentry} from "@sentry/vite-plugin"
 import tailwind from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
-// import {remixDevTools} from "remix-development-tools"
+import {remixDevTools} from "remix-development-tools"
 import {loadEnv} from "vite"
 import tsconfigPaths from "vite-tsconfig-paths"
 import {defineConfig} from "vitest/config"
@@ -26,11 +26,11 @@ const config = defineConfig(({mode}) => {
         plugins: [
             tsconfigPaths(),
             tailwind(),
-            // remixDevTools({
-            //     client: {
-            //         showBreakpointIndicator: false,
-            //     },
-            // }),
+            remixDevTools({
+                client: {
+                    showBreakpointIndicator: false,
+                },
+            }),
             process.env.VITEST
                 ? react()
                 : remix({
