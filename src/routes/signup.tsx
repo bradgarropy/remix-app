@@ -1,5 +1,5 @@
 import type {ActionFunctionArgs, MetaFunction} from "@remix-run/node"
-import {Form} from "@remix-run/react"
+import {Form, useActionData} from "@remix-run/react"
 
 import {signUp} from "~/utils/auth.server"
 
@@ -20,6 +20,8 @@ export const action = async ({request}: ActionFunctionArgs) => {
 }
 
 const Route = () => {
+    const data = useActionData<typeof action>()
+
     return (
         <>
             <h2 className="text-2xl font-bold mb-8">Sign up</h2>
@@ -31,8 +33,9 @@ const Route = () => {
                     id="email"
                     name="email"
                     type="email"
-                    className="px-4 py-2 border-2 border-black rounded-md mb-4"
+                    className="px-4 py-2 border-2 border-black rounded-md"
                 />
+                <p className="text-red-500 mb-4">{data?.errors.email}</p>
 
                 <label htmlFor="password">Password</label>
                 <input
@@ -41,8 +44,9 @@ const Route = () => {
                     name="password"
                     type="password"
                     autoComplete="new-password"
-                    className="px-4 py-2 border-2 border-black rounded-md mb-4"
+                    className="px-4 py-2 border-2 border-black rounded-md"
                 />
+                <p className="text-red-500 mb-4">{data?.errors.password}</p>
 
                 <label htmlFor="passwordConfirmation">Confirm password</label>
                 <input
@@ -51,8 +55,11 @@ const Route = () => {
                     name="passwordConfirmation"
                     type="password"
                     autoComplete="new-password"
-                    className="px-4 py-2 border-2 border-black rounded-md mb-4"
+                    className="px-4 py-2 border-2 border-black rounded-md"
                 />
+                <p className="text-red-500 mb-4">
+                    {data?.errors.passwordConfirmation}
+                </p>
 
                 <button
                     type="submit"

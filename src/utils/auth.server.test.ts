@@ -17,6 +17,7 @@ import {
 } from "~/utils/auth.server"
 import * as email from "~/utils/email.server"
 import * as session from "~/utils/session.server"
+import type {DataResponse} from "~/utils/types"
 
 const getUserByIdSpy = vitest.spyOn(users, "getUserById")
 const getUserByEmailSpy = vitest.spyOn(users, "getUserByEmail")
@@ -59,16 +60,14 @@ describe("signUp", () => {
 
         const request = new Request("http://example.com")
 
-        const signUpPromise = signUp({
+        const {data} = (await signUp({
             request,
             email: homer.email,
             password: "password",
             passwordConfirmation: "password",
-        })
+        })) as DataResponse
 
-        await expect(() => signUpPromise).rejects.toThrowError(
-            "User already exists",
-        )
+        expect(data.errors.email).toEqual("User already exists")
     })
 
     test("passwords do not match", async () => {
@@ -76,14 +75,15 @@ describe("signUp", () => {
 
         const request = new Request("http://example.com")
 
-        const signUpPromise = signUp({
+        const {data} = (await signUp({
             request,
             email: homer.email,
             password: "password",
             passwordConfirmation: "different-password",
-        })
+        })) as DataResponse
 
-        await expect(() => signUpPromise).rejects.toThrowError(
+        expect(data.errors.password).toEqual("Passwords do not match")
+        expect(data.errors.passwordConfirmation).toEqual(
             "Passwords do not match",
         )
     })
@@ -120,14 +120,14 @@ describe("signIn", () => {
 
         const request = new Request("http://example.com")
 
-        const signInPromise = signIn({
+        const {data} = (await signIn({
             request,
             email: homer.email,
             password: "password",
             redirectUrl: "/",
-        })
+        })) as DataResponse
 
-        await expect(signInPromise).rejects.toThrowError("User not found")
+        expect(data.errors.email).toEqual("User not found")
     })
 
     test("invalid password", async () => {
@@ -138,14 +138,14 @@ describe("signIn", () => {
 
         const request = new Request("http://example.com")
 
-        const signInPromise = signIn({
+        const {data} = (await signIn({
             request,
             email: homer.email,
             password: "password",
             redirectUrl: "/",
-        })
+        })) as DataResponse
 
-        await expect(signInPromise).rejects.toThrowError("Invalid password")
+        expect(data.errors.password).toEqual("Invalid password")
     })
 })
 
@@ -201,7 +201,7 @@ describe("forgotPassword", () => {
 
         const request = new Request("http://example.com")
 
-        const {message} = await forgotPassword({request, email: homer.email})
+        const {data} = await forgotPassword({request, email: homer.email})
 
         expect(sendEmailSpy).toHaveBeenCalledTimes(1)
 
@@ -215,7 +215,8 @@ describe("forgotPassword", () => {
             html: expect.any(String),
         })
 
-        expect(message).toEqual(mockEmail)
+        expect(data.message).toEqual(mockEmail)
+        expect(data.errors).toEqual({})
     })
 
     test("user not found", async () => {
@@ -223,9 +224,10 @@ describe("forgotPassword", () => {
 
         const request = new Request("http://example.com")
 
-        await expect(() =>
-            forgotPassword({request, email: homer.email}),
-        ).rejects.toThrowError("User not found")
+        const {data} = await forgotPassword({request, email: homer.email})
+
+        expect(data.message).toBeUndefined()
+        expect(data.errors?.email).toEqual("User not found")
     })
 })
 
@@ -263,16 +265,14 @@ describe("resetPassword", () => {
 
         const request = new Request("http://example.com")
 
-        const resetPasswordPromise = resetPassword({
+        const {data} = (await resetPassword({
             request,
             token: "invalid-reset-token",
             newPassword: "new-password",
             newPasswordConfirmation: "new-password",
-        })
+        })) as DataResponse
 
-        await expect(resetPasswordPromise).rejects.toThrowError(
-            "Invalid reset token",
-        )
+        expect(data.errors.newPassword).toEqual("Invalid reset token")
     })
 
     test("reset token is expired", async () => {
@@ -280,17 +280,14 @@ describe("resetPassword", () => {
 
         const request = new Request("http://example.com")
 
-        const resetPasswordPromise = resetPassword({
+        const {data} = (await resetPassword({
             request,
             token: mockExpiredResetToken.token,
             newPassword: "new-password",
             newPasswordConfirmation: "new-password",
-        })
+        })) as DataResponse
 
-        await expect(resetPasswordPromise).rejects.toThrowError(
-            "Reset token is expired",
-        )
-
+        expect(data.errors.newPassword).toEqual("Reset token is expired")
         expect(deleteResetTokenSpy).toHaveBeenCalledTimes(1)
 
         expect(deleteResetTokenSpy).toHaveBeenLastCalledWith(
@@ -304,16 +301,14 @@ describe("resetPassword", () => {
 
         const request = new Request("http://example.com")
 
-        const resetPasswordPromise = resetPassword({
+        const {data} = (await resetPassword({
             request,
             token: mockResetToken.token,
             newPassword: "new-password",
             newPasswordConfirmation: "new-password",
-        })
+        })) as DataResponse
 
-        await expect(resetPasswordPromise).rejects.toThrowError(
-            "User not found",
-        )
+        expect(data.errors.newPassword).toEqual("User not found")
     })
 
     test("passwords do not match", async () => {
@@ -322,14 +317,15 @@ describe("resetPassword", () => {
 
         const request = new Request("http://example.com")
 
-        const resetPasswordPromise = resetPassword({
+        const {data} = (await resetPassword({
             request,
             token: mockResetToken.token,
             newPassword: "new-password",
             newPasswordConfirmation: "new-password-confirmation",
-        })
+        })) as DataResponse
 
-        await expect(resetPasswordPromise).rejects.toThrowError(
+        expect(data.errors.newPassword).toEqual("Passwords do not match")
+        expect(data.errors.newPasswordConfirmation).toEqual(
             "Passwords do not match",
         )
     })

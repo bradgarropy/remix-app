@@ -1,6 +1,7 @@
 import type {ResetToken, User} from "@prisma/client"
-import {redirect} from "@remix-run/node"
+import {data, redirect} from "@remix-run/node"
 import bcrypt from "bcryptjs"
+import type SMTPTransport from "nodemailer/lib/smtp-transport"
 
 import {
     createResetToken,
@@ -14,6 +15,7 @@ import {
     updatePassword,
 } from "~/models/users.server"
 import {sendEmail} from "~/utils/email.server"
+import type {Errors} from "~/utils/errors"
 import {
     createSession,
     deleteSession,
@@ -33,14 +35,18 @@ const signUp = async ({
     password,
     passwordConfirmation,
 }: SignUpParams) => {
+    const errors: Errors = {}
     const userExists = await getUserByEmail(email)
 
     if (userExists) {
-        throw new Error("User already exists")
+        errors.email = "User already exists"
+        return data({errors}, {status: 400})
     }
 
     if (password !== passwordConfirmation) {
-        throw new Error("Passwords do not match")
+        errors.password = "Passwords do not match"
+        errors.passwordConfirmation = "Passwords do not match"
+        return data({errors}, {status: 400})
     }
 
     const user = await createUser({email, password})
@@ -68,16 +74,19 @@ const signIn = async ({
     password,
     redirectUrl,
 }: SignInParams) => {
+    const errors: Errors = {}
     const user = await getUserByEmail(email)
 
     if (!user) {
-        throw new Error("User not found")
+        errors.email = "User not found"
+        return data({errors}, {status: 400})
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password)
 
     if (!isPasswordMatch) {
-        throw new Error("Invalid password")
+        errors.password = "Invalid password"
+        return data({errors}, {status: 400})
     }
 
     console.log(`${user.email} signed in`)
@@ -121,11 +130,22 @@ type ForgotPasswordParams = {
     email: User["email"]
 }
 
+type ForgotPasswordResponse = {
+    message?: SMTPTransport.SentMessageInfo
+    errors?: Errors
+}
+
 const forgotPassword = async ({request, email}: ForgotPasswordParams) => {
+    const errors: Errors = {}
     const user = await getUserByEmail(email)
 
     if (!user) {
-        throw new Error("User not found")
+        errors.email = "User not found"
+
+        return data<ForgotPasswordResponse>(
+            {message: undefined, errors},
+            {status: 400},
+        )
     }
 
     const token = await createResetToken({userId: user.id})
@@ -141,7 +161,7 @@ const forgotPassword = async ({request, email}: ForgotPasswordParams) => {
         html: `<p>Click <a href="${url}">this link</a> to reset your password.</p>`,
     })
 
-    return {message}
+    return data<ForgotPasswordResponse>({message, errors})
 }
 
 type ResetPasswordParams = {
@@ -157,27 +177,33 @@ const resetPassword = async ({
     newPassword,
     newPasswordConfirmation,
 }: ResetPasswordParams) => {
+    const errors: Errors = {}
     const resetToken = await getResetToken(token)
 
     if (!resetToken) {
-        throw new Error("Invalid reset token")
+        errors.newPassword = "Invalid reset token"
+        return data({errors}, {status: 400})
     }
 
     const isExpired = resetToken.expiresAt < new Date()
 
     if (isExpired) {
         await deleteResetToken(resetToken.id)
-        throw new Error("Reset token is expired")
+        errors.newPassword = "Reset token is expired"
+        return data({errors}, {status: 400})
     }
 
     const userExists = await getUserById(resetToken.userId)
 
     if (!userExists) {
-        throw new Error("User not found")
+        errors.newPassword = "User not found"
+        return data({errors}, {status: 400})
     }
 
     if (newPassword !== newPasswordConfirmation) {
-        throw new Error("Passwords do not match")
+        errors.newPassword = "Passwords do not match"
+        errors.newPasswordConfirmation = "Passwords do not match"
+        return data({errors}, {status: 400})
     }
 
     const user = await updatePassword({

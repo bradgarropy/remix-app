@@ -1,3 +1,5 @@
+type Errors = Record<string, string | undefined>
+
 const createErrorStack = (error: Error) => {
     if (!error.stack) {
         return ""
@@ -7,4 +9,10 @@ const createErrorStack = (error: Error) => {
     return shortStack
 }
 
-export {createErrorStack}
+const hasErrors = (errors: Errors) => {
+    const hasErrors = Object.keys(errors).length > 0
+    return hasErrors
+}
+
+export {createErrorStack, hasErrors}
+export type {Errors}

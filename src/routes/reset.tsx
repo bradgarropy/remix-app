@@ -1,5 +1,5 @@
 import type {ActionFunctionArgs, MetaFunction} from "@remix-run/node"
-import {Form} from "@remix-run/react"
+import {Form, useActionData} from "@remix-run/react"
 
 import {resetPassword} from "~/utils/auth.server"
 
@@ -31,6 +31,8 @@ export const action = async ({request, params}: ActionFunctionArgs) => {
 }
 
 const Route = () => {
+    const data = useActionData<typeof action>()
+
     return (
         <>
             <h2 className="text-2xl font-bold mb-8">Reset password</h2>
@@ -43,8 +45,9 @@ const Route = () => {
                     name="newPassword"
                     type="password"
                     autoComplete="new-password"
-                    className="px-4 py-2 border-2 border-black rounded-md mb-4"
+                    className="px-4 py-2 border-2 border-black rounded-md"
                 />
+                <p className="text-red-500 mb-4">{data?.errors.newPassword}</p>
 
                 <label htmlFor="newPasswordConfirmation">
                     Confirm new password
@@ -55,8 +58,11 @@ const Route = () => {
                     name="newPasswordConfirmation"
                     type="password"
                     autoComplete="new-password"
-                    className="px-4 py-2 border-2 border-black rounded-md mb-4"
+                    className="px-4 py-2 border-2 border-black rounded-md"
                 />
+                <p className="text-red-500 mb-4">
+                    {data?.errors.newPasswordConfirmation}
+                </p>
 
                 <button
                     type="submit"

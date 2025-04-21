@@ -30,8 +30,9 @@ const Route = () => {
                     id="email"
                     name="email"
                     type="email"
-                    className="px-4 py-2 border-2 border-black rounded-md mb-4"
+                    className="px-4 py-2 border-2 border-black rounded-md"
                 />
+                <p className="text-red-500 mb-4">{data?.errors?.email}</p>
 
                 <button
                     type="submit"
