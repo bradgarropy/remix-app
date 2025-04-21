@@ -1,9 +1,7 @@
 import type {ActionFunctionArgs, MetaFunction} from "@remix-run/node"
 import {Form, useActionData} from "@remix-run/react"
 
-import {createResetToken} from "~/models/resetTokens.server"
-import {getUserByEmail} from "~/models/users.server"
-import {sendEmail} from "~/utils/email.server"
+import {forgotPassword} from "~/utils/auth.server"
 
 export const meta: MetaFunction = () => [
     {
@@ -15,26 +13,7 @@ export const action = async ({request}: ActionFunctionArgs) => {
     const formData = await request.formData()
 
     const email = String(formData.get("email"))
-    const user = await getUserByEmail(email)
-
-    if (!user) {
-        throw new Error("User not found")
-    }
-
-    const token = await createResetToken({userId: user.id})
-
-    const {origin} = new URL(request.url)
-    const url = `${origin}/reset/${token}`
-
-    const message = await sendEmail({
-        to: user.email,
-        from: "Remix App <remix-app@gmail.com>",
-        subject: "Reset your password",
-        text: `Click this link to reset your password: ${url}`,
-        html: `<p>Click <a href="${url}">this link</a> to reset your password.</p>`,
-    })
-
-    return {message}
+    return forgotPassword({request, email})
 }
 
 const Route = () => {
