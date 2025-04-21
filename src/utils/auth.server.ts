@@ -161,7 +161,7 @@ const forgotPassword = async ({request, email}: ForgotPasswordParams) => {
         html: `<p>Click <a href="${url}">this link</a> to reset your password.</p>`,
     })
 
-    return {message, errors}
+    return data<ForgotPasswordResponse>({message, errors})
 }
 
 type ResetPasswordParams = {
