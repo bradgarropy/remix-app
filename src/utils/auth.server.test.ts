@@ -2,17 +2,20 @@ import {redirect} from "@remix-run/node"
 import bcrypt from "bcryptjs"
 import {describe, expect, test, vitest} from "vitest"
 
+import {mockEmail} from "~/mocks/email"
 import {mockExpiredResetToken, mockResetToken} from "~/mocks/resetTokens"
 import {homer} from "~/mocks/users"
 import * as resetTokens from "~/models/resetTokens.server"
 import * as users from "~/models/users.server"
 import {
+    forgotPassword,
     requireUser,
     resetPassword,
     signIn,
     signOut,
     signUp,
 } from "~/utils/auth.server"
+import * as email from "~/utils/email.server"
 import * as session from "~/utils/session.server"
 
 const getUserByIdSpy = vitest.spyOn(users, "getUserById")
@@ -25,6 +28,7 @@ const getUserFromSessionSpy = vitest.spyOn(session, "getUserFromSession")
 const compareSpy = vitest.spyOn(bcrypt, "compare")
 const getResetTokenSpy = vitest.spyOn(resetTokens, "getResetToken")
 const deleteResetTokenSpy = vitest.spyOn(resetTokens, "deleteResetToken")
+const sendEmailSpy = vitest.spyOn(email, "sendEmail")
 
 describe("signUp", () => {
     test("user signs up", async () => {
@@ -187,6 +191,41 @@ describe("requireUser", () => {
         await expect(() => requireUser(request)).rejects.toEqual(
             redirect("/signin?redirectUrl=/"),
         )
+    })
+})
+
+describe("forgotPassword", () => {
+    test("remembers password", async () => {
+        getUserByEmailSpy.mockResolvedValueOnce(homer)
+        sendEmailSpy.mockResolvedValueOnce(mockEmail)
+
+        const request = new Request("http://example.com")
+
+        const {message} = await forgotPassword({request, email: homer.email})
+
+        expect(sendEmailSpy).toHaveBeenCalledTimes(1)
+
+        expect(sendEmailSpy).toHaveBeenLastCalledWith({
+            to: homer.email,
+            from: "Remix App <remix-app@gmail.com>",
+            subject: "Reset your password",
+            text: expect.stringContaining(
+                "Click this link to reset your password:",
+            ),
+            html: expect.any(String),
+        })
+
+        expect(message).toEqual(mockEmail)
+    })
+
+    test("user not found", async () => {
+        getUserByEmailSpy.mockResolvedValueOnce(null)
+
+        const request = new Request("http://example.com")
+
+        await expect(() =>
+            forgotPassword({request, email: homer.email}),
+        ).rejects.toThrowError("User not found")
     })
 })
 
