@@ -7,4 +7,9 @@ const createErrorStack = (error: Error) => {
     return shortStack
 }
 
-export {createErrorStack}
+const hasErrors = (errors: Record<string, string>) => {
+    const hasErrors = Object.keys(errors).length > 0
+    return hasErrors
+}
+
+export {createErrorStack, hasErrors}
