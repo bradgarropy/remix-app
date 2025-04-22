@@ -4,9 +4,11 @@ import type {
     MetaFunction,
 } from "@remix-run/node"
 import {Form, redirect} from "@remix-run/react"
+import {z} from "zod"
 
 import {createNote} from "~/models/notes.server"
 import {requireUser} from "~/utils/auth.server"
+import {parseFormData} from "~/utils/forms"
 
 export const meta: MetaFunction = () => [
     {
@@ -17,8 +19,11 @@ export const meta: MetaFunction = () => [
 export const action = async ({request}: ActionFunctionArgs) => {
     const user = await requireUser(request)
 
-    const formData = await request.formData()
-    const content = String(formData.get("content"))
+    const schema = z.object({
+        content: z.string(),
+    })
+
+    const {content} = await parseFormData(request, schema)
 
     await createNote({userId: user.id, content})
     return redirect("/notes")
