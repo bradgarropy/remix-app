@@ -1,7 +1,9 @@
 import type {ActionFunctionArgs, MetaFunction} from "@remix-run/node"
 import {Form, useActionData} from "@remix-run/react"
+import {z} from "zod"
 
 import {signUp} from "~/utils/auth.server"
+import {parseFormData} from "~/utils/forms"
 
 export const meta: MetaFunction = () => [
     {
@@ -10,11 +12,16 @@ export const meta: MetaFunction = () => [
 ]
 
 export const action = async ({request}: ActionFunctionArgs) => {
-    const formData = await request.formData()
+    const schema = z.object({
+        email: z.string().email(),
+        password: z.string(),
+        passwordConfirmation: z.string(),
+    })
 
-    const email = String(formData.get("email"))
-    const password = String(formData.get("password"))
-    const passwordConfirmation = String(formData.get("passwordConfirmation"))
+    const {email, password, passwordConfirmation} = await parseFormData(
+        request,
+        schema,
+    )
 
     return signUp({request, email, password, passwordConfirmation})
 }

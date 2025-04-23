@@ -36,6 +36,12 @@ _YYYY-MM-DD_
 
 - _TBD_
 
+## [0.0.18][0.0.18]
+
+_2025-04-22_
+
+- Validate form data and parameters with [`zod`][zod]
+
 ## [0.0.17][0.0.17]
 
 _2025-04-21_
@@ -143,7 +149,8 @@ _2025-02-04_
 
 [keep-a-changelog]: https://keepachangelog.com
 [semver]: https://semver.org
-[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.17...HEAD
+[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.18...HEAD
+[0.0.18]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.18
 [0.0.17]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.17
 [0.0.16]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.16
 [0.0.15]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.15
@@ -166,3 +173,4 @@ _2025-02-04_
 [github-actions]: https://github.com/features/actions
 [nodemailer]: https://www.nodemailer.com
 [vscode-tasks]: https://code.visualstudio.com/docs/terminal/basics#_automating-terminals-with-tasks
+[zod]: https://zod.dev

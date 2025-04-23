@@ -1,7 +1,9 @@
 import type {ActionFunctionArgs, MetaFunction} from "@remix-run/node"
 import {Form, useActionData} from "@remix-run/react"
+import {z} from "zod"
 
 import {resetPassword} from "~/utils/auth.server"
+import {parseFormData} from "~/utils/forms"
 
 export const meta: MetaFunction = () => [
     {
@@ -10,21 +12,25 @@ export const meta: MetaFunction = () => [
 ]
 
 export const action = async ({request, params}: ActionFunctionArgs) => {
-    if (!params.token) {
-        throw new Error("No password reset token provided")
-    }
+    const paramSchema = z.object({
+        token: z.string({required_error: "No password reset token provided"}),
+    })
 
-    const formData = await request.formData()
+    const {token} = paramSchema.parse(params)
 
-    const newPassword = String(formData.get("newPassword"))
+    const formSchema = z.object({
+        newPassword: z.string(),
+        newPasswordConfirmation: z.string(),
+    })
 
-    const newPasswordConfirmation = String(
-        formData.get("newPasswordConfirmation"),
+    const {newPassword, newPasswordConfirmation} = await parseFormData(
+        request,
+        formSchema,
     )
 
     return resetPassword({
         request,
-        token: params.token,
+        token,
         newPassword,
         newPasswordConfirmation,
     })

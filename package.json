@@ -1,6 +1,6 @@
 {
     "name": "remix-app",
-    "version": "0.0.17",
+    "version": "0.0.18",
     "description": "💿 remix app",
     "type": "module",
     "keywords": [
@@ -62,7 +62,8 @@
         "isbot": "^5.1.1",
         "nodemailer": "^6.10.0",
         "react": "^19.0.0",
-        "react-dom": "^19.0.0"
+        "react-dom": "^19.0.0",
+        "zod": "^3.24.3"
     },
     "devDependencies": {
         "@bradgarropy/eslint-config": "^3.1.1",

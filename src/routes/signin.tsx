@@ -1,7 +1,9 @@
 import type {ActionFunctionArgs, MetaFunction} from "@remix-run/node"
 import {Form, Link, useActionData, useSearchParams} from "@remix-run/react"
+import {z} from "zod"
 
 import {signIn} from "~/utils/auth.server"
+import {parseFormData} from "~/utils/forms"
 
 export const meta: MetaFunction = () => [
     {
@@ -10,19 +12,20 @@ export const meta: MetaFunction = () => [
 ]
 
 export const action = async ({request}: ActionFunctionArgs) => {
-    const formData = await request.formData()
+    const schema = z.object({
+        email: z.string().email(),
+        password: z.string(),
+        redirectUrl: z.string(),
+    })
 
-    const email = String(formData.get("email"))
-    const password = String(formData.get("password"))
-    const redirectUrl = String(formData.get("redirectUrl")) || "/"
-
+    const {email, password, redirectUrl} = await parseFormData(request, schema)
     return signIn({request, email, password, redirectUrl})
 }
 
 const Route = () => {
     const data = useActionData<typeof action>()
     const [searchParams] = useSearchParams()
-    const redirectUrl = searchParams.get("redirectUrl")
+    const redirectUrl = searchParams.get("redirectUrl") ?? "/"
 
     return (
         <>
@@ -50,11 +53,7 @@ const Route = () => {
                 />
                 <p className="text-red-500 mb-4">{data?.errors.password}</p>
 
-                <input
-                    type="hidden"
-                    name="redirectUrl"
-                    value={redirectUrl ?? undefined}
-                />
+                <input type="hidden" name="redirectUrl" value={redirectUrl} />
 
                 <button
                     type="submit"
