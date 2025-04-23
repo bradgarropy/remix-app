@@ -15,7 +15,7 @@ export const action = async ({request}: ActionFunctionArgs) => {
     const schema = z.object({
         email: z.string().email(),
         password: z.string(),
-        redirectUrl: z.string().default("/"),
+        redirectUrl: z.string(),
     })
 
     const {email, password, redirectUrl} = await parseFormData(request, schema)
@@ -25,7 +25,7 @@ export const action = async ({request}: ActionFunctionArgs) => {
 const Route = () => {
     const data = useActionData<typeof action>()
     const [searchParams] = useSearchParams()
-    const redirectUrl = searchParams.get("redirectUrl")
+    const redirectUrl = searchParams.get("redirectUrl") ?? "/"
 
     return (
         <>
@@ -53,11 +53,7 @@ const Route = () => {
                 />
                 <p className="text-red-500 mb-4">{data?.errors.password}</p>
 
-                <input
-                    type="hidden"
-                    name="redirectUrl"
-                    value={redirectUrl ?? undefined}
-                />
+                <input type="hidden" name="redirectUrl" value={redirectUrl} />
 
                 <button
                     type="submit"
