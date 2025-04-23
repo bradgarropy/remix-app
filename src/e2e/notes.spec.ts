@@ -105,5 +105,5 @@ test("restricted note", async ({page}) => {
     }
 
     await page.goto("/note/1")
-    await expect(page.getByText("Error: Unexpected Server Error")).toBeVisible()
+    await expect(page.getByText("Note not found")).toBeVisible()
 })
