@@ -60,7 +60,7 @@ export const loader = async ({request, params}: LoaderFunctionArgs) => {
     const note = await getNote({id, userId: user.id})
 
     if (!note) {
-        throw new Error("Note not found")
+        throw new Response("Note not found", {status: 404})
     }
 
     return {note}
