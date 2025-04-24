@@ -1,15 +1,9 @@
-import type {ActionFunctionArgs, MetaFunction} from "@remix-run/node"
+import type {ActionFunctionArgs} from "@remix-run/node"
 import {Form, useActionData} from "@remix-run/react"
 import {z} from "zod"
 
 import {signUp} from "~/utils/auth.server"
 import {parseFormData} from "~/utils/forms"
-
-export const meta: MetaFunction = () => [
-    {
-        title: "💿 remix app | sign up",
-    },
-]
 
 export const action = async ({request}: ActionFunctionArgs) => {
     const schema = z.object({
@@ -31,6 +25,7 @@ const Route = () => {
 
     return (
         <>
+            <title>💿 remix app | sign up</title>
             <h2 className="text-2xl font-bold mb-8">Sign up</h2>
 
             <Form method="post" className="grid max-w-xs">

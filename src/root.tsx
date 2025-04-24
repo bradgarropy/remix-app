@@ -1,8 +1,4 @@
-import type {
-    LinksFunction,
-    LoaderFunctionArgs,
-    MetaFunction,
-} from "@remix-run/node"
+import type {LoaderFunctionArgs} from "@remix-run/node"
 import {Links, Meta, Outlet, Scripts, ScrollRestoration} from "@remix-run/react"
 import {withSentry} from "@sentry/remix"
 
@@ -11,23 +7,6 @@ import Footer from "~/components/Footer"
 import Header from "~/components/Header"
 import tailwindStyles from "~/styles/tailwind.css?url"
 import {getUserFromSession} from "~/utils/session.server"
-
-export const meta: MetaFunction = () => [
-    {charset: "utf-8"},
-    {title: "💿 remix app"},
-    {viewport: "width=device-width,initial-scale=1"},
-]
-
-export const links: LinksFunction = () => {
-    const links = [
-        {
-            rel: "stylesheet",
-            href: tailwindStyles,
-        },
-    ]
-
-    return links
-}
 
 export const loader = async ({request}: LoaderFunctionArgs) => {
     const user = await getUserFromSession(request)
@@ -38,6 +17,15 @@ const App = () => {
     return (
         <html lang="en">
             <head>
+                <title>💿 remix app</title>
+                <link rel="stylesheet" href={tailwindStyles} />
+                <meta charSet="utf-8" />
+
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+
                 <meta
                     httpEquiv="Content-Type"
                     content="text/html;charset=utf-8"
@@ -69,6 +57,15 @@ export const ErrorBoundary = () => {
     return (
         <html lang="en">
             <head>
+                <title>💿 remix app</title>
+                <link rel="stylesheet" href={tailwindStyles} />
+                <meta charSet="utf-8" />
+
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+
                 <meta
                     httpEquiv="Content-Type"
                     content="text/html;charset=utf-8"

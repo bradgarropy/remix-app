@@ -1,14 +1,8 @@
-import type {LoaderFunctionArgs, MetaFunction} from "@remix-run/node"
+import type {LoaderFunctionArgs} from "@remix-run/node"
 import {Link, useLoaderData} from "@remix-run/react"
 
 import {getNotes} from "~/models/notes.server"
 import {requireUser} from "~/utils/auth.server"
-
-export const meta: MetaFunction = () => [
-    {
-        title: "💿 remix app | notes",
-    },
-]
 
 export const action = async () => {
     // TODO: implement delete note
@@ -27,6 +21,7 @@ const Route = () => {
 
     return (
         <>
+            <title>💿 remix app | notes</title>
             <h2 className="text-2xl font-bold mb-2">Notes</h2>
 
             <Link

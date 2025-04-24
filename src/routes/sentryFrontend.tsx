@@ -1,14 +1,7 @@
-import type {MetaFunction} from "@remix-run/node"
-
-export const meta: MetaFunction = () => [
-    {
-        title: "💿 remix app | sentry",
-    },
-]
-
 const Route = () => {
     return (
         <>
+            <title>💿 remix app | sentry</title>
             <h2 className="text-2xl font-bold mb-4">Sentry | Frontend Error</h2>
 
             <button
