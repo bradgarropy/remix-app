@@ -1,11 +1,3 @@
-import type {MetaFunction} from "@remix-run/node"
-
-export const meta: MetaFunction = () => [
-    {
-        title: "💿 remix app | sentry",
-    },
-]
-
 export const action = () => {
     throw new Error("Sentry Action Error")
 }
@@ -13,6 +5,7 @@ export const action = () => {
 const Route = () => {
     return (
         <>
+            <title>💿 remix app | sentry</title>
             <h2 className="text-2xl font-bold mb-4">Sentry | Action Error</h2>
 
             <form method="post">

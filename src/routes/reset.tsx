@@ -1,15 +1,9 @@
-import type {ActionFunctionArgs, MetaFunction} from "@remix-run/node"
+import type {ActionFunctionArgs} from "@remix-run/node"
 import {Form, useActionData} from "@remix-run/react"
 import {z} from "zod"
 
 import {resetPassword} from "~/utils/auth.server"
 import {parseFormData} from "~/utils/forms"
-
-export const meta: MetaFunction = () => [
-    {
-        title: "💿 remix app | reset",
-    },
-]
 
 export const action = async ({request, params}: ActionFunctionArgs) => {
     const paramSchema = z.object({
@@ -41,6 +35,7 @@ const Route = () => {
 
     return (
         <>
+            <title>💿 remix app | reset</title>
             <h2 className="text-2xl font-bold mb-8">Reset password</h2>
 
             <Form method="post" className="grid max-w-xs">

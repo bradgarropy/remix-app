@@ -1,20 +1,10 @@
-import type {
-    ActionFunctionArgs,
-    LoaderFunctionArgs,
-    MetaFunction,
-} from "@remix-run/node"
+import type {ActionFunctionArgs, LoaderFunctionArgs} from "@remix-run/node"
 import {Form, redirect} from "@remix-run/react"
 import {z} from "zod"
 
 import {createNote} from "~/models/notes.server"
 import {requireUser} from "~/utils/auth.server"
 import {parseFormData} from "~/utils/forms"
-
-export const meta: MetaFunction = () => [
-    {
-        title: "💿 remix app | new note",
-    },
-]
 
 export const action = async ({request}: ActionFunctionArgs) => {
     const user = await requireUser(request)
@@ -37,6 +27,7 @@ export const loader = async ({request}: LoaderFunctionArgs) => {
 const Route = () => {
     return (
         <>
+            <title>💿 remix app | new note</title>
             <h2 className="text-2xl font-bold mb-8">New note</h2>
 
             <Form method="post" className="grid max-w-xs">

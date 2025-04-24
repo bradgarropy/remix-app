@@ -1,11 +1,3 @@
-import type {MetaFunction} from "@remix-run/node"
-
-export const meta: MetaFunction = () => [
-    {
-        title: "💿 remix app | sentry",
-    },
-]
-
 export const loader = () => {
     throw new Error("Sentry Loader Error")
 }
@@ -13,6 +5,7 @@ export const loader = () => {
 const Route = () => {
     return (
         <>
+            <title>💿 remix app | sentry</title>
             <h2 className="text-2xl font-bold">Sentry | Loader Error</h2>
         </>
     )
