@@ -36,6 +36,12 @@ _YYYY-MM-DD_
 
 - _TBD_
 
+## [0.0.20][0.0.20]
+
+_2025-04-25_
+
+- Support TypeScript's [`erasableSyntaxOnly`][erasable-syntax-only] configuration
+
 ## [0.0.19][0.0.19]
 
 _2025-04-24_
@@ -155,7 +161,8 @@ _2025-02-04_
 
 [keep-a-changelog]: https://keepachangelog.com
 [semver]: https://semver.org
-[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.19...HEAD
+[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.20...HEAD
+[0.0.20]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.20
 [0.0.19]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.19
 [0.0.18]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.18
 [0.0.17]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.17
@@ -182,3 +189,4 @@ _2025-02-04_
 [vscode-tasks]: https://code.visualstudio.com/docs/terminal/basics#_automating-terminals-with-tasks
 [zod]: https://zod.dev
 [metadata]: https://react.dev/blog/2024/12/05/react-19#support-for-metadata-tags
+[erasable-syntax-only]: https://typescriptlang.org/tsconfig/#erasableSyntaxOnly
