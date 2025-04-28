@@ -48,6 +48,8 @@ const createSession = async ({
     const maxAge = remember ? SEVEN_DAYS_IN_SECONDS : undefined
     const cookie = await sessionStorage.commitSession(session, {maxAge})
 
+    console.log("cookie", cookie)
+
     return redirect(redirectUrl, {headers: {"set-cookie": cookie}})
 }
 
