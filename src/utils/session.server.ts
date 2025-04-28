@@ -40,18 +40,21 @@ const createSession = async ({
     remember = false,
     redirectUrl,
 }: CreateSessionParams) => {
-    console.log("createSession", {userId, remember, redirectUrl})
-    const session = await getSession(request)
-    console.log("session", session)
-    session.set("userId", userId)
+    try {
+        console.log("createSession", {userId, remember, redirectUrl})
+        const session = await getSession(request)
+        console.log("session", session)
+        session.set("userId", userId)
 
-    const SEVEN_DAYS_IN_SECONDS = 60 * 60 * 24 * 7
-    const maxAge = remember ? SEVEN_DAYS_IN_SECONDS : undefined
-    const cookie = await sessionStorage.commitSession(session, {maxAge})
+        const SEVEN_DAYS_IN_SECONDS = 60 * 60 * 24 * 7
+        const maxAge = remember ? SEVEN_DAYS_IN_SECONDS : undefined
+        const cookie = await sessionStorage.commitSession(session, {maxAge})
 
-    console.log("cookie", cookie)
-
-    return redirect(redirectUrl, {headers: {"set-cookie": cookie}})
+        console.log("cookie", cookie)
+        return redirect(redirectUrl, {headers: {"set-cookie": cookie}})
+    } catch (error) {
+        console.error("Error creating session", error)
+    }
 }
 
 const deleteSession = async (request: Request) => {
