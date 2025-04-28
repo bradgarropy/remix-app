@@ -6,8 +6,8 @@ const transport = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-        user: process.env.SMTP_USERNAME,
-        pass: process.env.SMTP_PASSWORD,
+        user: import.meta.env.VITE_SMTP_USERNAME,
+        pass: import.meta.env.VITE_SMTP_PASSWORD,
     },
 })
 
