@@ -38,6 +38,7 @@ const createSession = async ({
     remember = false,
     redirectUrl,
 }: CreateSessionParams) => {
+    console.log("createSession", {userId, remember, redirectUrl})
     const session = await getSession(request)
     session.set("userId", userId)
 

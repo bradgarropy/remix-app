@@ -13,6 +13,7 @@ export const action = async ({request}: ActionFunctionArgs) => {
     })
 
     const {email, password, redirectUrl} = await parseFormData(request, schema)
+    console.log({email, password, redirectUrl})
     return signIn({request, email, password, redirectUrl})
 }
 
