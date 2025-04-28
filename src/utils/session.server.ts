@@ -42,6 +42,7 @@ const createSession = async ({
 }: CreateSessionParams) => {
     console.log("createSession", {userId, remember, redirectUrl})
     const session = await getSession(request)
+    console.log("session", session)
     session.set("userId", userId)
 
     const SEVEN_DAYS_IN_SECONDS = 60 * 60 * 24 * 7
