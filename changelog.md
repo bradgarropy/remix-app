@@ -36,6 +36,12 @@ _YYYY-MM-DD_
 
 - _TBD_
 
+## [0.0.21][0.0.21]
+
+_2025-04-28_
+
+- Typed environment variables
+
 ## [0.0.20][0.0.20]
 
 _2025-04-25_
@@ -161,7 +167,8 @@ _2025-02-04_
 
 [keep-a-changelog]: https://keepachangelog.com
 [semver]: https://semver.org
-[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.20...HEAD
+[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.21...HEAD
+[0.0.21]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.21
 [0.0.20]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.20
 [0.0.19]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.19
 [0.0.18]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.18
