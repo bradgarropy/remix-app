@@ -7,6 +7,8 @@ type UserSession = {
     userId: User["id"]
 }
 
+console.log("session secret", import.meta.env.VITE_SESSION_SECRET)
+
 const sessionStorage = createCookieSessionStorage<UserSession>({
     cookie: {
         name: "__session",

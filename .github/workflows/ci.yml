@@ -91,7 +91,7 @@ jobs:
             - name: "🛠️ build"
               run: npm run build
             - name: "🎭 e2e"
-              run: npm run test:e2e
+              run: DEBUG=pw:webserver npm run test:e2e
               env:
                   VITE_SESSION_SECRET: ${{ secrets.VITE_SESSION_SECRET}}
             - name: "📤 artifact"
