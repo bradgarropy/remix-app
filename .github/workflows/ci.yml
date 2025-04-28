@@ -68,7 +68,7 @@ jobs:
             - name: "🧪 test"
               run: npm run test
               env:
-                  VITE_SESSION_SECRET: ${{ secrets.SESSION_SECRET}}
+                  VITE_SESSION_SECRET: ${{ secrets.VITE_SESSION_SECRET}}
             - name: "☂️ coverage"
               uses: codecov/codecov-action@v5
               with:
@@ -93,7 +93,7 @@ jobs:
             - name: "🎭 e2e"
               run: npm run test:e2e
               env:
-                  VITE_SESSION_SECRET: ${{ secrets.SESSION_SECRET}}
+                  VITE_SESSION_SECRET: ${{ secrets.VITE_SESSION_SECRET}}
             - name: "📤 artifact"
               uses: actions/upload-artifact@v4
               if: ${{ !cancelled() }}
