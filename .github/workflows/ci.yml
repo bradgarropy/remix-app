@@ -90,6 +90,8 @@ jobs:
               run: npx playwright install --with-deps
             - name: "🛠️ build"
               run: npm run build
+              env:
+                  VITE_SESSION_SECRET: ${{ secrets.VITE_SESSION_SECRET}}
             - name: "🎭 e2e"
               run: npm run test:e2e
               env:
