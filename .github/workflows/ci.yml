@@ -68,7 +68,7 @@ jobs:
             - name: "🧪 test"
               run: npm run test
               env:
-                  SESSION_SECRET: ${{ secrets.SESSION_SECRET}}
+                  VITE_SESSION_SECRET: ${{ secrets.SESSION_SECRET}}
             - name: "☂️ coverage"
               uses: codecov/codecov-action@v5
               with:
