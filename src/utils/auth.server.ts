@@ -74,11 +74,8 @@ const signIn = async ({
     password,
     redirectUrl,
 }: SignInParams) => {
-    console.log("signIn", {email, password, redirectUrl})
     const errors: Errors = {}
     const user = await getUserByEmail(email)
-
-    console.log({user})
 
     if (!user) {
         errors.email = "User not found"

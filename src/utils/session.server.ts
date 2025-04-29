@@ -7,8 +7,6 @@ type UserSession = {
     userId: User["id"]
 }
 
-console.log("session secret", import.meta.env.VITE_SESSION_SECRET)
-
 const sessionStorage = createCookieSessionStorage<UserSession>({
     cookie: {
         name: "__session",
@@ -40,21 +38,14 @@ const createSession = async ({
     remember = false,
     redirectUrl,
 }: CreateSessionParams) => {
-    try {
-        console.log("createSession", {userId, remember, redirectUrl})
-        const session = await getSession(request)
-        console.log("session", session)
-        session.set("userId", userId)
+    const session = await getSession(request)
+    session.set("userId", userId)
 
-        const SEVEN_DAYS_IN_SECONDS = 60 * 60 * 24 * 7
-        const maxAge = remember ? SEVEN_DAYS_IN_SECONDS : undefined
-        const cookie = await sessionStorage.commitSession(session, {maxAge})
+    const SEVEN_DAYS_IN_SECONDS = 60 * 60 * 24 * 7
+    const maxAge = remember ? SEVEN_DAYS_IN_SECONDS : undefined
+    const cookie = await sessionStorage.commitSession(session, {maxAge})
 
-        console.log("cookie", cookie)
-        return redirect(redirectUrl, {headers: {"set-cookie": cookie}})
-    } catch (error) {
-        console.error("Error creating session", error)
-    }
+    return redirect(redirectUrl, {headers: {"set-cookie": cookie}})
 }
 
 const deleteSession = async (request: Request) => {
