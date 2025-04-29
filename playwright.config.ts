@@ -23,7 +23,8 @@ const config = defineConfig({
         },
     ],
     webServer: {
-        command: "npm start",
+        command:
+            "echo $SESSION_SECRET && echo $VITE_SESSION_SECRET && npm start",
         url: "http://localhost:3000",
         reuseExistingServer: !process.env.CI,
     },
