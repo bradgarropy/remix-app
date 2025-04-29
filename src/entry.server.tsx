@@ -12,8 +12,8 @@ import {createRelease} from "~/utils/sentry"
 const streamTimeout = 5000
 
 Sentry.init({
-    dsn: process.env.VITE_SENTRY_DSN,
-    environment: process.env.NODE_ENV,
+    dsn: import.meta.env.VITE_SENTRY_DSN,
+    environment: import.meta.env.MODE,
     release: createRelease(),
 })
 

@@ -60,7 +60,7 @@ describe("createSession", () => {
 describe("getSession", () => {
     test("gets session", async () => {
         const cookie = await createCookie("__session", {
-            secrets: [process.env.SESSION_SECRET!],
+            secrets: [import.meta.env.VITE_SESSION_SECRET],
         }).serialize({userId: homer.id})
 
         const request = new Request("https://example.com", {
@@ -77,7 +77,7 @@ describe("getUserFromSession", () => {
         getUserByIdSpy.mockResolvedValueOnce(homer)
 
         const cookie = await createCookie("__session", {
-            secrets: [process.env.SESSION_SECRET!],
+            secrets: [import.meta.env.VITE_SESSION_SECRET],
         }).serialize({userId: homer.id})
 
         const request = new Request("https://example.com", {
@@ -90,7 +90,7 @@ describe("getUserFromSession", () => {
 
     test("handles no user", async () => {
         const cookie = await createCookie("__session", {
-            secrets: [process.env.SESSION_SECRET!],
+            secrets: [import.meta.env.VITE_SESSION_SECRET],
         }).serialize({})
 
         const request = new Request("https://example.com", {
@@ -105,7 +105,7 @@ describe("getUserFromSession", () => {
 describe("deleteSession", () => {
     test("deletes session", async () => {
         const cookie = await createCookie("__session", {
-            secrets: [process.env.SESSION_SECRET!],
+            secrets: [import.meta.env.VITE_SESSION_SECRET],
         }).serialize({userId: homer.id})
 
         const request = new Request("https://example.com", {
