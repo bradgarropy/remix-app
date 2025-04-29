@@ -38,7 +38,7 @@ _YYYY-MM-DD_
 
 ## [0.0.21][0.0.21]
 
-_2025-04-28_
+_2025-04-29_
 
 - Typed environment variables
 
