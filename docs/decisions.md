@@ -34,9 +34,9 @@ Here are a few alternatives I considered when choosing technologies.
 [biome]: https://biomejs.dev
 [eslint]: https://eslint.org
 [drizzle]: https://orm.drizzle.team
-[prisma]: http://prisma.io
+[prisma]: https://prisma.io
 [arktype]: https://arktype.io
 [valibot]: https://valibot.dev
-[zod]: http://zod.dev
+[zod]: https://zod.dev
 [cypress]: https://cypress.io
 [playwright]: https://playwright.dev

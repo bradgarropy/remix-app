@@ -89,12 +89,12 @@ Continuous integration
 [remix]: https://remix.run
 [react]: https://react.dev
 [prisma]: https://prisma.io
-[zod]: http://zod.dev
+[zod]: https://zod.dev
 [nodemailer]: https://nodemailer.com
-[vite]: http://vite.dev
-[testing-library]: http://testing-library.com
+[vite]: https://vite.dev
+[testing-library]: https://testing-library.com
 [playwright]: https://playwright.dev
-[neon]: http://neon.tech
-[sentry]: http://sentry.io
+[neon]: https://neon.tech
+[sentry]: https://sentry.io
 [principles]: docs/principles.md
 [decisions]: docs/decisions.md
