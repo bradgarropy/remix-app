@@ -19,39 +19,39 @@ This starter application is built with these [principles][principles] and [decis
 
 ## ✳️ features
 
-Authentication  
-Password reset  
-User data  
-ORM integration  
-CRUD operations  
-Error monitoring  
-Unit tests  
-E2E tests  
-Linting  
-Formatting  
-Continuous integration
+- Authentication
+- Password reset
+- User data
+- ORM integration
+- CRUD operations
+- Error monitoring
+- Unit tests
+- E2E tests
+- Linting
+- Formatting
+- Continuous integration
 
 ## 🖲️ technology
 
-[TypeScript][typescript]  
-[React][react]  
-[Remix][remix]  
-[Prisma][prisma]  
-[Tailwind][tailwind]  
-[Zod][zod]  
-[Nodemailer][nodemailer]  
-[Vite][vite]  
-[ESLint][eslint]  
-[Prettier][prettier]  
-[Vitest][vitest]  
-[Testing Library][testing-library]  
-[Playwright][playwright]
+- [TypeScript][typescript]
+- [React][react]
+- [Remix][remix]
+- [Prisma][prisma]
+- [Tailwind][tailwind]
+- [Zod][zod]
+- [Nodemailer][nodemailer]
+- [Vite][vite]
+- [ESLint][eslint]
+- [Prettier][prettier]
+- [Vitest][vitest]
+- [Testing Library][testing-library]
+- [Playwright][playwright]
 
 ## 🛎️ services
 
-[Vercel][vercel]  
-[_Neon_][neon]  
-[Sentry][sentry]
+- [Vercel][vercel]
+- [_Neon_][neon]
+- [Sentry][sentry]
 
 ## ✨ contributors
 
