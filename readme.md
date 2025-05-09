@@ -15,6 +15,20 @@ _A [Remix][remix] starter application with [ESLint][eslint], [Prettier][prettier
     </a>
 </p>
 
+## ✳️ features
+
+Authentication  
+Password reset  
+User data  
+ORM integration  
+CRUD operations  
+Error monitoring  
+Unit tests  
+E2E tests  
+Linting  
+Formatting  
+Continuous integration
+
 ## 🖲️ technology
 
 [TypeScript][typescript]  
