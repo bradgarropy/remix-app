@@ -174,7 +174,8 @@ _2025-02-04_
 
 [keep-a-changelog]: https://keepachangelog.com
 [semver]: https://semver.org
-[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.0.21...HEAD
+[unreleased]: https://github.com/bradgarropy/remix-app/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/bradgarropy/remix-app/releases/tag/v0.1.0
 [0.0.21]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.21
 [0.0.20]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.20
 [0.0.19]: https://github.com/bradgarropy/remix-app/releases/tag/v0.0.19
