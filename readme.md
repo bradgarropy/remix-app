@@ -15,6 +15,28 @@ _A [Remix][remix] starter application with [ESLint][eslint], [Prettier][prettier
     </a>
 </p>
 
+## 🖲️ technology
+
+[TypeScript][typescript]  
+[React][react]  
+[Remix][remix]  
+[Prisma][prisma]  
+[Tailwind][tailwind]  
+[Zod][zod]  
+[Nodemailer][nodemailer]  
+[Vite][vite]  
+[Eslint][eslint]  
+[Prettier][prettier]  
+[Vitest][vitest]  
+[Testing Library][testing-library]  
+[Playwright][playwright]
+
+## 🛎️ services
+
+[Vercel][vercel]  
+[_Neon_][neon]  
+[Sentry][sentry]
+
 ## ✨ contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -49,3 +71,12 @@ _A [Remix][remix] starter application with [ESLint][eslint], [Prettier][prettier
 [vitest]: https://vitest.dev
 [tailwind]: https://tailwindcss.com
 [remix]: https://remix.run
+[react]: https://react.dev
+[prisma]: https://prisma.io
+[zod]: http://zod.dev
+[nodemailer]: https://nodemailer.com
+[vite]: http://vite.dev
+[testing-library]: http://testing-library.com
+[playwright]: https://playwright.dev
+[neon]: http://neon.tech
+[sentry]: http://sentry.io
