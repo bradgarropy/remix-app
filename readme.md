@@ -41,7 +41,7 @@ Continuous integration
 [Zod][zod]  
 [Nodemailer][nodemailer]  
 [Vite][vite]  
-[Eslint][eslint]  
+[ESLint][eslint]  
 [Prettier][prettier]  
 [Vitest][vitest]  
 [Testing Library][testing-library]  
