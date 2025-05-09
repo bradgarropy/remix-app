@@ -36,6 +36,13 @@ _YYYY-MM-DD_
 
 - _TBD_
 
+## [0.1.0][0.1.0]
+
+_2025-05-09_
+
+- Improve the [readme][readme]
+- Add [principles][principles] and [decisions][decisions] documents
+
 ## [0.0.21][0.0.21]
 
 _2025-04-29_
@@ -197,3 +204,6 @@ _2025-02-04_
 [zod]: https://zod.dev
 [metadata]: https://react.dev/blog/2024/12/05/react-19#support-for-metadata-tags
 [erasable-syntax-only]: https://typescriptlang.org/tsconfig/#erasableSyntaxOnly
+[readme]: readme.md
+[principles]: docs/principles.md
+[decisions]: docs/decisions.md
