@@ -15,6 +15,44 @@ _A [Remix][remix] starter application with [ESLint][eslint], [Prettier][prettier
     </a>
 </p>
 
+This starter application is built with these [principles][principles] and [decisions][decisions] in mind.
+
+## ✳️ features
+
+- Authentication
+- Password reset
+- User data
+- ORM integration
+- CRUD operations
+- Error monitoring
+- Unit tests
+- E2E tests
+- Linting
+- Formatting
+- Continuous integration
+
+## 🖲️ technology
+
+- [TypeScript][typescript]
+- [React][react]
+- [Remix][remix]
+- [Prisma][prisma]
+- [Tailwind][tailwind]
+- [Zod][zod]
+- [Nodemailer][nodemailer]
+- [Vite][vite]
+- [ESLint][eslint]
+- [Prettier][prettier]
+- [Vitest][vitest]
+- [Testing Library][testing-library]
+- [Playwright][playwright]
+
+## 🛎️ services
+
+- [Vercel][vercel]
+- [_Neon_][neon]
+- [Sentry][sentry]
+
 ## ✨ contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -49,3 +87,14 @@ _A [Remix][remix] starter application with [ESLint][eslint], [Prettier][prettier
 [vitest]: https://vitest.dev
 [tailwind]: https://tailwindcss.com
 [remix]: https://remix.run
+[react]: https://react.dev
+[prisma]: https://prisma.io
+[zod]: https://zod.dev
+[nodemailer]: https://nodemailer.com
+[vite]: https://vite.dev
+[testing-library]: https://testing-library.com
+[playwright]: https://playwright.dev
+[neon]: https://neon.tech
+[sentry]: https://sentry.io
+[principles]: docs/principles.md
+[decisions]: docs/decisions.md
