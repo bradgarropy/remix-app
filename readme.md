@@ -97,4 +97,4 @@ Continuous integration
 [neon]: http://neon.tech
 [sentry]: http://sentry.io
 [principles]: docs/principles.md
-[decisions]: docs/descisions.md
+[decisions]: docs/decisions.md
