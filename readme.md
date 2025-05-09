@@ -15,6 +15,8 @@ _A [Remix][remix] starter application with [ESLint][eslint], [Prettier][prettier
     </a>
 </p>
 
+This starter application is built with these [principles][principles] and [decisions][decisions] in mind.
+
 ## ✳️ features
 
 Authentication  
@@ -94,3 +96,5 @@ Continuous integration
 [playwright]: https://playwright.dev
 [neon]: http://neon.tech
 [sentry]: http://sentry.io
+[principles]: docs/principles.md
+[decisions]: docs/descisions.md
