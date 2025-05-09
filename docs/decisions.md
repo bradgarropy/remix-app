@@ -2,6 +2,13 @@
 
 Here are a few alternatives I considered when choosing technologies.
 
+## Linting
+
+| Name             | Result |
+| :--------------- | :----- |
+| [Biome][biome]   | ❌     |
+| [ESLint][eslint] | ✅     |
+
 ## ORM
 
 | Name               | Result |
@@ -24,6 +31,8 @@ Here are a few alternatives I considered when choosing technologies.
 | [Cypress][cypress]       | ❌     |
 | [Playwright][playwright] | ✅     |
 
+[biome]: https://biomejs.dev
+[eslint]: https://eslint.org
 [drizzle]: https://orm.drizzle.team
 [prisma]: http://prisma.io
 [arktype]: https://arktype.io
